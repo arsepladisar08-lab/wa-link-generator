@@ -1,0 +1,1895 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>WALIG Pro - WhatsApp Link Generator Instan</title>
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- QRCode.js Library -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+  <!-- Canvas Confetti Library for Support & Donation Animations -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: 'var(--brand-50, #f0fdf4)',
+              100: 'var(--brand-100, #dcfce7)',
+              200: 'var(--brand-200, #bbf7d0)',
+              500: 'var(--brand-500, #22c55e)',
+              600: 'var(--brand-600, #16a34a)',
+              700: 'var(--brand-700, #15803d)',
+              wa: '#25D366',
+              wadark: '#075E54',
+              wateal: '#128C7E',
+              walight: '#DCF8C6'
+            }
+          },
+          animation: {
+            'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+            'float': 'floating 3s ease-in-out infinite'
+          },
+          keyframes: {
+            floating: {
+              '0%, 100%': { transform: 'translateY(0px)' },
+              '50%': { transform: 'translateY(-6px)' }
+            }
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    :root {
+      --brand-50: #f0fdf4;
+      --brand-100: #dcfce7;
+      --brand-200: #bbf7d0;
+      --brand-500: #22c55e;
+      --brand-600: #16a34a;
+      --brand-700: #15803d;
+    }
+    html.dark body {
+      background-color: #0b0f19;
+      color: #f1f5f9;
+    }
+    html.dark .bg-white {
+      background-color: #111827 !important;
+      color: #f1f5f9;
+    }
+    html.dark .bg-slate-50 {
+      background-color: #0f172a !important;
+    }
+    html.dark .bg-slate-100 {
+      background-color: #1e293b !important;
+    }
+    html.dark .text-slate-900 {
+      color: #f9fafb !important;
+    }
+    html.dark .text-slate-800 {
+      color: #f3f4f6 !important;
+    }
+    html.dark .text-slate-700 {
+      color: #e2e8f0 !important;
+    }
+    html.dark .text-slate-600 {
+      color: #94a3b8 !important;
+    }
+    html.dark .text-slate-500 {
+      color: #94a3b8 !important;
+    }
+    html.dark .border-slate-100,
+    html.dark .border-slate-200 {
+      border-color: #334155 !important;
+    }
+    html.dark header {
+      background-color: rgba(17, 24, 39, 0.95) !important;
+      border-color: #1f2937 !important;
+    }
+    html.dark footer {
+      background-color: #111827 !important;
+      border-color: #1f2937 !important;
+    }
+    html.dark input, 
+    html.dark textarea,
+    html.dark select {
+      background-color: #0b0f19 !important;
+      color: #f9fafb !important;
+      border-color: #374151 !important;
+    }
+    .wa-bg-pattern {
+      background-color: #EFEAE2;
+      background-image: radial-gradient(#d1c7b7 0.75px, transparent 0.75px), radial-gradient(#d1c7b7 0.75px, #EFEAE2 0.75px);
+      background-size: 28px 28px;
+      background-position: 0 0, 14px 14px;
+    }
+    html.dark .wa-bg-pattern {
+      background-color: #1e293b !important;
+      background-image: radial-gradient(#334155 0.75px, transparent 0.75px), radial-gradient(#334155 0.75px, #1e293b 0.75px) !important;
+    }
+    .step-card {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background: #f8fafc;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: #cbd5e1;
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: #94a3b8;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-600 selection:text-white min-h-screen flex flex-col justify-between">
+
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
+      <!-- Logo langsung mengarah ke Landing Page / Home -->
+      <div class="flex items-center gap-3 cursor-pointer select-none" onclick="switchPage('landing')" title="WALIG Pro - Ke Beranda">
+        <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-700 via-brand-600 to-brand-wa flex items-center justify-center text-white shadow-md shadow-brand-600/20">
+          <i class="fa-brands fa-whatsapp text-2xl"></i>
+        </div>
+        <div>
+          <span class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 flex items-center">
+            WhatsApp <span class="text-brand-600">Link Generator</span>
+            <span class="ml-2 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Suite</span>
+          </span>
+        </div>
+      </div>
+
+      <!-- User status indicator & Navigation -->
+      <div class="flex items-center gap-3">
+        <div id="navUserBadge" class="hidden items-center gap-2 bg-slate-100 dark:bg-slate-800 py-1.5 px-3 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300">
+          <div class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></div>
+          <span id="navUserName" class="max-w-[120px] sm:max-w-[180px] truncate">Pengguna</span>
+          <button type="button" onclick="handleLogout()" class="text-slate-400 hover:text-red-600 ml-1 transition" title="Ganti Akun">
+            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+          </button>
+        </div>
+
+        <!-- Quick 1-Click Dark/Light Mode Toggle -->
+        <button 
+          type="button" 
+          id="quickThemeBtn" 
+          onclick="toggleQuickTheme()" 
+          class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition active:scale-95 shadow-2xs" 
+          title="Beralih Mode Gelap/Terang"
+        >
+          <i id="quickThemeIcon" class="fa-solid fa-moon text-sm text-slate-600 dark:text-amber-400"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Note: Stepper bar has been removed to keep the interface completely clean and distraction-free -->
+
+  <main class="flex-1 py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
+
+    <!-- ============================================================ -->
+    <!-- HALAMAN KHUSUS: LANDING PAGE & PANDUAN LENGKAP               -->
+    <!-- ============================================================ -->
+    <section id="pageLanding" class="step-card hidden max-w-5xl mx-auto space-y-16 animate-in fade-in duration-300">
+      
+      <!-- Hero Section -->
+      <div class="text-center space-y-5 pt-4">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100 text-brand-800 text-xs font-extrabold shadow-2xs border border-brand-200">
+          <i class="fa-solid fa-bolt text-brand-600"></i>
+          Platform Generator Link WhatsApp Bisnis & Pribadi #1 Indonesia
+        </div>
+        <h1 class="text-3xl sm:text-5xl lg:text-6xl font-black text-slate-900 tracking-tight leading-tight">
+          Buat Tautan WhatsApp Instan <br class="hidden sm:block" />
+          <span class="text-transparent bg-clip-text bg-gradient-to-r from-brand-600 via-emerald-600 to-teal-600">
+            Tanpa Simpan Nomor, 100% Otomatis
+          </span>
+        </h1>
+        <p class="text-slate-600 text-sm sm:text-base leading-relaxed max-w-2xl mx-auto">
+          Tingkatkan konversi penjualan, permudah pendaftaran pelanggan, dan hindari kesalahan pengetikan pesan. Hasilkan tautan resmi (<code class="text-brand-700 bg-brand-50 px-1.5 py-0.5 rounded font-mono font-semibold">wa.me</code>) dengan pesan otomatis dan QR Code HD dalam hitungan detik.
+        </p>
+
+        <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
+          <button type="button" onclick="switchPage(1)" class="py-3.5 px-7 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-xl shadow-brand-600/30 transition active:scale-95 flex items-center gap-2">
+            <span>Mulai Buat Link Gratis</span>
+            <i class="fa-solid fa-arrow-right text-xs"></i>
+          </button>
+          <a href="#landingFeatures" class="py-3.5 px-5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-sm transition shadow-2xs">
+            Eksplorasi Fitur
+          </a>
+        </div>
+
+        <!-- Social Proof Stats Badges -->
+        <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
+          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-xs">
+            <span class="block text-xl font-black text-slate-900">45.000+</span>
+            <span class="text-[11px] font-semibold text-slate-500">Tautan Dibuat</span>
+          </div>
+          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-xs">
+            <span class="block text-xl font-black text-emerald-600">3 Detik</span>
+            <span class="text-[11px] font-semibold text-slate-500">Proses Generate</span>
+          </div>
+          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-xs">
+            <span class="block text-xl font-black text-brand-600">100%</span>
+            <span class="text-[11px] font-semibold text-slate-500">Gratis & Bebas Kuota</span>
+          </div>
+          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-xs">
+            <span class="block text-xl font-black text-teal-600">0 Data</span>
+            <span class="text-[11px] font-semibold text-slate-500">Privasi Terjaga Aman</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fitur Unggulan Lengkap -->
+      <div id="landingFeatures" class="space-y-6">
+        <div class="text-center max-w-xl mx-auto">
+          <span class="text-xs font-extrabold uppercase tracking-wider text-brand-600">Keunggulan WALIG Pro</span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-1">Dirancang untuk Efisiensi & Penjualan</h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">Semua fitur yang Anda butuhkan untuk menjangkau calon pelanggan tanpa friksi.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
+            <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-wand-magic-sparkles"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 mb-1.5">Auto-Format Standar Internasional</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Ketik nomor sesuka Anda (<code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">0812...</code> atau <code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">62812...</code>). Sistem otomatis memangkas angka 0 di depan dan memadukan kode negara secara presisi.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
+            <div class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-mobile-screen"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 mb-1.5">Live Mockup WhatsApp Smartphone</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Pratinjau tampilan pesan secara langsung di layar smartphone virtual sebelum link disebarkan. Lengkap dengan format teks tebal, miring, dan jam real-time.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
+            <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-qrcode"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 mb-1.5">QR Code Resolusi Tinggi (Siap Cetak)</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Hasilkan gambar QR Code berformat PNG dengan sekali klik. Siap ditempel di brosur fisik, kartu nama, etalase kasir toko, hingga kemasan paket (packaging).
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
+            <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-file-lines"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 mb-1.5">Template Pesan Bisnis Populer</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Hemat waktu dengan 4 template siap pakai: Format Order Olshop, Pertanyaan Customer Care, Reservasi Jadwal, dan Konsultasi Layanan Jasa.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
+            <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-database"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 mb-1.5">Riwayat Personal Terkategori</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Tautan yang telah Anda rancang otomatis tersimpan di sesi akun Anda. Salin ulang atau kelola daftar tautan tanpa perlu mengetik ulang pesan dari nol.
+            </p>
+          </div>
+
+          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
+            <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
+              <i class="fa-solid fa-shield-halved"></i>
+            </div>
+            <h3 class="font-bold text-base text-slate-900 mb-1.5">Aman, Ringan & Tanpa Iklan Mengganggu</h3>
+            <p class="text-xs text-slate-600 leading-relaxed">
+              Dijalankan langsung di browser Anda dengan proteksi privasi. Tidak memerlukan instalasi aplikasi tambahan atau pendaftaran kartu kredit.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Studi Kasus & Contoh Penggunaan (Use Cases) -->
+      <div class="bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 shadow-2xl space-y-8">
+        <div class="text-center max-w-xl mx-auto space-y-2">
+          <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400">Penerapan Nyata</span>
+          <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Cocok untuk Segala Kebutuhan Digital</h2>
+          <p class="text-xs sm:text-sm text-slate-400">Lihat bagaimana para praktisi bisnis memanfaatkan WALIG Pro.</p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+          <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-cart-shopping"></i>
+              </div>
+              <h4 class="font-bold text-sm text-white">Toko Online & E-Commerce</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Pasang link di Bio Instagram atau TikTok dengan template <span class="text-emerald-300">"Halo Admin, saya ingin pesan Produk X, Jumlah 2 pcs"</span>. Pembeli langsung terarah ke format rapi tanpa bolak-balik tanya harga.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-utensils"></i>
+              </div>
+              <h4 class="font-bold text-sm text-white">Restoran, Cafe & Katering</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Cetak QR Code di atas meja kasir atau brosur menu. Pengunjung cukup scan kamera HP untuk reservasi tempat duduk atau request pesanan catering langsung ke WhatsApp manager.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-briefcase"></i>
+              </div>
+              <h4 class="font-bold text-sm text-white">Konsultan, Notaris & Agen Properti</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Buat link jadwal konsultasi personal. Calon klien tidak canggung memulai percakapan karena subjek dan sapaan awal sudah terisi secara profesional.
+            </p>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition">
+            <div class="flex items-center gap-3 mb-3">
+              <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-calendar-check"></i>
+              </div>
+              <h4 class="font-bold text-sm text-white">Webinar, Event & Komunitas</h4>
+            </div>
+            <p class="text-xs text-slate-300 leading-relaxed">
+              Sertakan tautan di email blast atau pamflet digital. Peserta yang menemui kendala login atau verifikasi tiket dapat langsung menghubungi PIC panitia dengan 1 ketukan.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tips WhatsApp Marketing & Panduan Format Teks -->
+      <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-100 shadow-xl shadow-slate-200/50 space-y-6">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
+          <div>
+            <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Knowledge Base</span>
+            <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">Tips WhatsApp Copywriting yang Menghasilkan Order</h3>
+          </div>
+          <span class="self-start sm:self-auto px-3 py-1 bg-brand-50 text-brand-700 text-xs font-bold rounded-full border border-brand-200">
+            Formula CTR Tinggi
+          </span>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs text-slate-600">
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">1</span>
+              Sapaan Hangat & Spesifik
+            </div>
+            <p class="leading-relaxed">
+              Sebutkan sumber calon pembeli mendapatkan link, misal: <em class="text-slate-800">"Halo Admin, saya lihat promo dari Instagram..."</em>. Ini memudahkan tim CS memetakan kanal promosi paling efektif.
+            </p>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">2</span>
+              Manfaatkan Format Teks
+            </div>
+            <p class="leading-relaxed">
+              Gunakan tanda bintang (<code class="font-mono bg-white px-1 border">*Tebal*</code>) untuk nama produk atau batas promo, dan garis bawah (<code class="font-mono bg-white px-1 border">_Miring_</code>) untuk detail catatan. Teks berformat 2x lebih mudah dibaca sekilas.
+            </p>
+          </div>
+
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
+            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">3</span>
+              Pancing Respon Cepat (CTA)
+            </div>
+            <p class="leading-relaxed">
+              Akhiri pesan dengan kalimat tanya sederhana seperti: <em class="text-slate-800">"Apakah stok warna biru masih ada kak?"</em>. Pertanyaan memicu kewajiban bawah sadar admin untuk membalas segera.
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- FAQ Interaktif Accordion -->
+      <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-100 shadow-xl shadow-slate-200/50 space-y-6">
+        <div class="text-center max-w-xl mx-auto mb-6">
+          <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Tanya Jawab</span>
+          <h3 class="text-2xl font-extrabold text-slate-900 mt-1">Pertanyaan yang Sering Diajukan (FAQ)</h3>
+        </div>
+
+        <div class="space-y-3 max-w-3xl mx-auto" id="landingFaqContainer">
+          
+          <!-- FAQ 1 -->
+          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all">
+            <button type="button" onclick="toggleLandingFaq(1)" class="w-full p-4.5 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm">
+              <span>Apakah layanan WALIG Pro ini benar-benar gratis?</span>
+              <i id="faqIcon-1" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faqAnswer-1" class="hidden p-4.5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+              Ya, 100% gratis tanpa biaya tersembunyi, tanpa batas jumlah link yang dibuat, dan tanpa batasan masa berlaku. Tautan <code class="bg-slate-100 px-1 py-0.5 rounded text-brand-700">wa.me</code> yang dihasilkan adalah tautan resmi dari WhatsApp sehingga akan aktif selamanya selama nomor tujuan tetap aktif.
+            </div>
+          </div>
+
+          <!-- FAQ 2 -->
+          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all">
+            <button type="button" onclick="toggleLandingFaq(2)" class="w-full p-4.5 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm">
+              <span>Mengapa ada syarat wajib follow & membagikan link tools ini?</span>
+              <i id="faqIcon-2" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faqAnswer-2" class="hidden p-4.5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+              WALIG Pro didedikasikan sebagai software gratis untuk memajukan sesama pegiat UMKM, digital marketer, dan pebisnis online. Konfirmasi follow dan share adalah bentuk gotong royong agar lebih banyak rekan wirausaha di luar sana yang terbantu tanpa perlu membayar software berbayar mahal.
+            </div>
+          </div>
+
+          <!-- FAQ 3 -->
+          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all">
+            <button type="button" onclick="toggleLandingFaq(3)" class="w-full p-4.5 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm">
+              <span>Apakah nomor telepon dan pesan saya aman (tidak disebar)?</span>
+              <i id="faqIcon-3" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faqAnswer-3" class="hidden p-4.5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+              Sangat aman! Seluruh enkripsi URL dan riwayat riwayat disimpan secara lokal di peramban (browser) masing-masing pengguna. Data nomor Anda tidak diperjualbelikan atau digunakan untuk spam pihak ketiga.
+            </div>
+          </div>
+
+          <!-- FAQ 4 -->
+          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all">
+            <button type="button" onclick="toggleLandingFaq(4)" class="w-full p-4.5 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm">
+              <span>Bagaimana jika nomor saya berasal dari luar Indonesia?</span>
+              <i id="faqIcon-4" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
+            </button>
+            <div id="faqAnswer-4" class="hidden p-4.5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+              WALIG Pro mendukung berbagai pilihan kode negara, termasuk Malaysia (+60), Singapura (+65), Australia (+61), Arab Saudi (+966), Amerika Serikat (+1), Inggris (+44), dan negara lainnya. Cukup pilih kode negara dari dropdown di Halaman Studio.
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Bottom CTA Banner -->
+      <div class="bg-gradient-to-r from-brand-600 via-emerald-600 to-teal-600 rounded-3xl p-8 sm:p-12 text-white shadow-2xl flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left">
+        <div class="space-y-2 max-w-xl">
+          <h3 class="text-2xl sm:text-3xl font-black tracking-tight">Siap Mempermudah Calon Pelanggan Anda?</h3>
+          <p class="text-xs sm:text-sm text-white/80 leading-relaxed">
+            Hanya butuh 1 menit untuk meracik tautan WhatsApp berpesan otomatis dan QR Code siap pakai.
+          </p>
+        </div>
+        <button 
+          type="button" 
+          onclick="switchPage(1)" 
+          class="py-4 px-8 rounded-2xl bg-white text-brand-700 hover:bg-brand-50 font-black text-sm shadow-xl active:scale-95 transition shrink-0 flex items-center gap-2"
+        >
+          <span>Masuk & Buat Link Sekarang</span>
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+      </div>
+
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- HALAMAN 1: LOGIN & VERIFIKASI AKSES (CLEAN & MINIMALIST)    -->
+    <!-- ============================================================ -->
+    <section id="page1" class="step-card max-w-md mx-auto block animate-in fade-in duration-300">
+      
+      <!-- Minimalist Header Icon & Title -->
+      <div class="text-center mb-6">
+        <div class="w-12 h-12 rounded-2xl bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 border border-brand-200/70 dark:border-brand-800/70 flex items-center justify-center text-xl mx-auto mb-3 shadow-2xs">
+          <i class="fa-brands fa-whatsapp"></i>
+        </div>
+        <h1 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
+          Selamat Datang
+        </h1>
+        <p class="mt-1 text-xs text-slate-500 dark:text-slate-400">
+          Masukkan nama Anda untuk mulai membuat link WhatsApp instan
+        </p>
+      </div>
+
+      <!-- Clean Card Container -->
+      <div class="bg-white dark:bg-slate-900 rounded-3xl p-6 sm:p-7 shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-100 dark:border-slate-800">
+        <form id="loginForm" class="space-y-4" onsubmit="handleLoginSubmit(event)">
+          
+          <!-- Input Nama Pengguna -->
+          <div>
+            <label for="userNameInput" class="block text-xs font-semibold text-slate-700 dark:text-slate-300 mb-1.5">
+              Nama Lengkap atau Bisnis <span class="text-red-500">*</span>
+            </label>
+            <div class="relative flex items-center">
+              <div class="absolute left-3.5 text-slate-400 text-xs">
+                <i class="fa-regular fa-user"></i>
+              </div>
+              <input 
+                type="text" 
+                id="userNameInput" 
+                required 
+                placeholder="cth: Toko Berkah / Budi"
+                class="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 font-medium bg-slate-50/50 dark:bg-slate-800/40 transition-all focus:outline-hidden"
+              >
+            </div>
+          </div>
+
+          <!-- Syarat Mutlak Follow & Share (Minimalist Box) -->
+          <div id="followRequirementBox" class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 transition-all space-y-2">
+            <label class="flex items-start gap-2.5 cursor-pointer select-none group">
+              <input 
+                type="checkbox" 
+                id="checkFollowShare" 
+                required
+                onchange="handleFollowCheckboxChange(this)"
+                class="mt-0.5 w-4 h-4 rounded text-brand-600 focus:ring-brand-500 border-slate-300 dark:border-slate-600 transition cursor-pointer"
+              >
+              <span class="text-xs text-slate-600 dark:text-slate-300 leading-snug group-hover:text-slate-900 dark:group-hover:text-white transition">
+                Saya telah <strong>follow & membagikan</strong> tools ini <span class="text-red-500 font-bold">*</span>
+              </span>
+            </label>
+
+            <!-- Compact Share Trigger -->
+            <div class="pt-1 flex items-center justify-between border-t border-slate-200/60 dark:border-slate-700/60">
+              <span class="text-[10px] text-slate-400 font-mono">s.id/WALinkGenerator</span>
+              <button 
+                type="button" 
+                onclick="shareCurrentTool()" 
+                class="text-[11px] font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 flex items-center gap-1 transition"
+                title="Salin dan bagikan link"
+              >
+                <i class="fa-solid fa-share-nodes text-[10px]"></i>
+                <span>Bagikan</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Primary Submit Button -->
+          <div class="pt-1">
+            <button 
+              type="submit" 
+              id="loginSubmitBtn"
+              class="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-brand-600/25 transition active:scale-98 cursor-pointer"
+            >
+              <span id="loginBtnText">Masuk & Mulai Buat Link</span>
+              <i class="fa-solid fa-arrow-right text-xs"></i>
+            </button>
+          </div>
+
+          <!-- Subtle Link ke Panduan -->
+          <div class="text-center pt-2">
+            <button 
+              type="button" 
+              onclick="switchPage('landing')" 
+              class="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-medium inline-flex items-center gap-1.5 transition"
+            >
+              <i class="fa-regular fa-circle-question text-[11px]"></i>
+              <span>Pelajari cara pakai di Panduan Lengkap</span>
+            </button>
+          </div>
+
+        </form>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- HALAMAN 2: MEMBUAT LINK (STUDIO BERSIH & KELAS PROFESIONAL) -->
+    <!-- ============================================================ -->
+    <section id="page2" class="step-card hidden max-w-6xl mx-auto">
+      <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8">
+        <div>
+          <div class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wider text-brand-700 mb-1">
+            <i class="fa-solid fa-wand-magic-sparkles"></i>
+            Studio Generator Link
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold text-slate-900 tracking-tight">
+            Konfigurasi Nomor & Pesan Otomatis
+          </h2>
+          <p class="text-xs sm:text-sm text-slate-500 mt-1">
+            Halo <strong id="studioGreetingUser" class="text-slate-800">Kak</strong>, silakan rancang link WhatsApp Anda di bawah ini.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-2">
+          <button type="button" onclick="switchPage(1)" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-xs font-semibold transition">
+            <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Login
+          </button>
+          <button type="button" onclick="resetGeneratorForm()" class="px-3.5 py-2 rounded-xl text-slate-500 hover:text-red-600 hover:bg-red-50 text-xs font-semibold transition">
+            <i class="fa-solid fa-rotate-left mr-1"></i> Kosongkan
+          </button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <!-- Left 7 cols: Form Panel -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 space-y-6">
+          
+          <!-- Input Nomor WhatsApp -->
+          <div>
+            <label for="phoneNumber" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Nomor WhatsApp Tujuan <span class="text-red-500">*</span>
+            </label>
+            <div class="flex rounded-2xl shadow-2xs border border-slate-200 focus-within:border-brand-500 focus-within:ring-4 focus-within:ring-brand-500/15 transition-all overflow-hidden bg-slate-50/50">
+              <div class="relative flex items-center border-r border-slate-200 bg-slate-100/70 px-3 py-2.5">
+                <select id="countryCode" class="bg-transparent text-xs sm:text-sm font-bold text-slate-800 outline-hidden pr-6 cursor-pointer appearance-none">
+                  <option value="62" selected>🇮🇩 +62 (ID)</option>
+                  <option value="60">🇲🇾 +60 (MY)</option>
+                  <option value="65">🇸🇬 +65 (SG)</option>
+                  <option value="1">🇺🇸 +1 (US)</option>
+                  <option value="44">🇬🇧 +44 (UK)</option>
+                  <option value="61">🇦🇺 +61 (AU)</option>
+                  <option value="966">🇸🇦 +966 (SA)</option>
+                </select>
+                <i class="fa-solid fa-chevron-down text-[9px] text-slate-400 absolute right-2.5 pointer-events-none"></i>
+              </div>
+              <div class="relative flex-1 flex items-center">
+                <input 
+                  type="tel" 
+                  id="phoneNumber" 
+                  placeholder="Contoh: 08123456789 atau 8123456789"
+                  class="w-full px-4 py-3.5 bg-transparent text-sm text-slate-900 placeholder:text-slate-400 font-semibold focus:outline-hidden"
+                >
+                <button id="clearPhoneBtn" type="button" class="hidden text-slate-300 hover:text-slate-500 mr-3 text-sm" title="Bersihkan">
+                  <i class="fa-solid fa-circle-xmark"></i>
+                </button>
+              </div>
+            </div>
+            <p class="mt-1.5 text-[11px] text-slate-500 flex items-center gap-1">
+              <i class="fa-solid fa-circle-check text-brand-600"></i>
+              Format otomatis: Angka nol (0) di depan akan dikonversi ke kode negara secara aman.
+            </p>
+          </div>
+
+          <!-- Input Pesan Kustom -->
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <label for="customMessage" class="block text-xs font-bold uppercase tracking-wider text-slate-700">
+                Pesan Pembuka (Pre-filled Text)
+              </label>
+              <span id="charCounter" class="text-[11px] font-mono text-slate-400">0 karakter</span>
+            </div>
+
+            <!-- Format Toolbar -->
+            <div class="flex items-center flex-wrap gap-1 mb-2 px-2.5 py-1.5 bg-slate-100/80 border border-slate-200/80 rounded-xl text-xs text-slate-600">
+              <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1">Format:</span>
+              <button type="button" onclick="insertFormatting('*')" class="px-2 py-1 hover:bg-white rounded-md font-bold transition">Tebal (*)</button>
+              <button type="button" onclick="insertFormatting('_')" class="px-2 py-1 hover:bg-white rounded-md italic transition">Miring (_)</button>
+              <button type="button" onclick="insertFormatting('~')" class="px-2 py-1 hover:bg-white rounded-md line-through transition">Coret (~)</button>
+              <div class="h-3 w-[1px] bg-slate-300 mx-1"></div>
+              <button type="button" onclick="insertEmoji('👋')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Halo">👋</button>
+              <button type="button" onclick="insertEmoji('🛒')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Keranjang">🛒</button>
+              <button type="button" onclick="insertEmoji('📦')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Paket">📦</button>
+              <button type="button" onclick="insertEmoji('✨')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Kilau">✨</button>
+              <button type="button" onclick="insertEmoji('🙏')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Terima kasih">🙏</button>
+            </div>
+
+            <textarea 
+              id="customMessage" 
+              rows="4" 
+              placeholder="Ketik pesan otomatis... Contoh: Halo Admin, saya tertarik dengan promo produk Anda. Mau tanya cara pemesanannya ya!"
+              class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 text-sm text-slate-900 placeholder:text-slate-400 font-sans focus:outline-hidden transition bg-slate-50/50"
+            ></textarea>
+          </div>
+
+          <!-- AI Message Template Generator -->
+          <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-50/70 via-brand-50/40 to-slate-50 dark:from-slate-800/80 dark:via-slate-800/50 dark:to-slate-900 border border-emerald-200/80 dark:border-slate-700 space-y-3">
+            <div class="flex items-center justify-between">
+              <div class="flex items-center gap-2">
+                <div class="w-6 h-6 rounded-lg bg-brand-600 text-white flex items-center justify-center text-xs shadow-xs">
+                  <i class="fa-solid fa-wand-magic-sparkles"></i>
+                </div>
+                <span class="text-xs font-bold text-slate-900 dark:text-white">Bantu Buat Pesan dengan AI</span>
+              </div>
+              <span class="text-[10px] font-semibold px-2 py-0.5 rounded-full bg-brand-100 dark:bg-brand-950 text-brand-700 dark:text-brand-300 border border-brand-200 dark:border-brand-800">
+                Gemini AI
+              </span>
+            </div>
+
+            <!-- Input Ide Kasar -->
+            <div class="space-y-2">
+              <input 
+                type="text" 
+                id="aiPromptInput" 
+                placeholder="Tulis ide kasar (cth: promo diskon 30% all item akhir pekan, tanya stok warna baju)"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-hidden focus:border-brand-500"
+                onkeydown="if(event.key==='Enter'){event.preventDefault();generateAiTemplate();}"
+              >
+              
+              <div class="flex items-center justify-between gap-2 flex-wrap">
+                <div class="flex items-center gap-1.5">
+                  <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Gaya:</span>
+                  <select id="aiToneSelect" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-[11px] px-2 py-1 text-slate-700 dark:text-slate-300 font-medium focus:outline-hidden cursor-pointer">
+                    <option value="Santai & Ramah">Santai & Ramah</option>
+                    <option value="Sopan & Formal Bisnis">Sopan & Formal Bisnis</option>
+                    <option value="Promosi Menarik & Urgent">Promosi Menarik & Urgent</option>
+                    <option value="Ringkas & To-The-Point">Ringkas & To-The-Point</option>
+                  </select>
+                </div>
+
+                <button 
+                  type="button" 
+                  id="btnAiGenerate"
+                  onclick="generateAiTemplate()" 
+                  class="px-3.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white text-xs font-bold flex items-center gap-1.5 transition shadow-xs cursor-pointer"
+                >
+                  <i id="aiBtnIcon" class="fa-solid fa-sparkles text-[11px]"></i>
+                  <span id="aiBtnText">Ramu Pesan AI</span>
+                </button>
+              </div>
+            </div>
+
+            <!-- AI Output Suggestion List Container -->
+            <div id="aiSuggestionsContainer" class="hidden pt-2 space-y-2 border-t border-emerald-200/50 dark:border-slate-700">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
+                Pilih Opsi Pesan yang Sesuai:
+              </span>
+              <div id="aiResultsList" class="space-y-2">
+                <!-- Dynamically populated via JS -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Template Pilihan Cepat -->
+          <div>
+            <span class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2">Template Pesan Siap Pakai:</span>
+            <div class="flex flex-wrap gap-2">
+              <button type="button" onclick="useTemplate('order')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition">
+                🛍️ Format Order Toko
+              </button>
+              <button type="button" onclick="useTemplate('cs')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition">
+                💬 Customer Care
+              </button>
+              <button type="button" onclick="useTemplate('booking')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition">
+                📅 Booking Jadwal
+              </button>
+              <button type="button" onclick="useTemplate('inquiry')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition">
+                💼 Konsultasi Layanan
+              </button>
+            </div>
+          </div>
+
+          <!-- Generate & Proceed to Step 3 Button -->
+          <div class="pt-4 border-t border-slate-100">
+            <button 
+              type="button" 
+              onclick="processAndProceedToStep3()" 
+              class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 text-white font-bold text-sm shadow-xl shadow-brand-600/25 transition active:scale-98 flex items-center justify-center gap-2"
+            >
+              <span>Simpan & Lihat Hasil Lengkap (CTA)</span>
+              <i class="fa-solid fa-arrow-right"></i>
+            </button>
+          </div>
+
+        </div>
+
+        <!-- Right 5 cols: Live Smartphone Mockup -->
+        <div class="lg:col-span-5 flex flex-col items-center">
+          <div class="w-full max-w-xs sm:max-w-sm bg-slate-900 rounded-[2.8rem] p-3 shadow-2xl border-4 border-slate-800 relative">
+            <!-- Notch -->
+            <div class="absolute top-6 left-1/2 -translate-x-1/2 w-28 h-4 bg-slate-950 rounded-full flex items-center justify-center z-30">
+              <div class="w-2.5 h-2.5 rounded-full bg-slate-900 mr-2"></div>
+              <div class="w-7 h-1 rounded-full bg-slate-800"></div>
+            </div>
+
+            <!-- Screen Area -->
+            <div class="w-full h-[490px] rounded-[2.2rem] overflow-hidden flex flex-col relative bg-slate-100 wa-bg-pattern border border-slate-700/40">
+              <!-- WhatsApp Header -->
+              <div class="bg-brand-wadark text-white px-4 pt-8 pb-3 shadow-md z-20 flex items-center justify-between">
+                <div class="flex items-center gap-2.5 overflow-hidden">
+                  <i class="fa-solid fa-arrow-left text-xs opacity-70"></i>
+                  <div class="w-8 h-8 rounded-full bg-emerald-800 text-white flex items-center justify-center text-xs font-bold shrink-0 border border-emerald-500/30">
+                    <i class="fa-solid fa-user"></i>
+                  </div>
+                  <div class="truncate">
+                    <p id="previewTargetHeader" class="text-xs font-bold leading-tight truncate">Nomor Bisnis</p>
+                    <p class="text-[10px] text-emerald-300 font-medium">online</p>
+                  </div>
+                </div>
+                <div class="flex items-center gap-3 text-slate-300 text-xs">
+                  <i class="fa-solid fa-phone"></i>
+                  <i class="fa-solid fa-ellipsis-vertical"></i>
+                </div>
+              </div>
+
+              <!-- Chat Stream -->
+              <div class="flex-1 p-4 overflow-y-auto flex flex-col justify-end space-y-3 z-10">
+                <div class="self-center bg-amber-50/95 border border-amber-200/80 text-amber-950 text-[10px] px-3 py-1 rounded-lg text-center shadow-2xs max-w-[90%]">
+                  <i class="fa-solid fa-lock text-[9px] mr-1"></i> Pesan terenkripsi aman.
+                </div>
+
+                <div class="self-end max-w-[88%] bg-brand-walight text-slate-900 rounded-2xl rounded-tr-xs p-3 shadow-2xs border border-emerald-300/40 transition-all">
+                  <p id="previewMessageBubble" class="text-xs whitespace-pre-wrap leading-relaxed break-words font-normal">
+                    Pesan Anda akan tampil di sini secara live saat mengetik...
+                  </p>
+                  <div class="flex items-center justify-end gap-1 mt-1.5 text-[9px] text-slate-500">
+                    <span id="previewClock">12:00</span>
+                    <i class="fa-solid fa-check-double text-blue-500"></i>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Input bar bottom dummy -->
+              <div class="bg-slate-100 p-2.5 border-t border-slate-200 flex items-center gap-2 z-20">
+                <div class="flex-1 bg-white rounded-full px-3 py-1.5 flex items-center gap-2 border border-slate-200 text-slate-400 text-xs">
+                  <i class="fa-regular fa-face-smile"></i>
+                  <span class="text-[11px] truncate">Ketik pesan...</span>
+                </div>
+                <div class="w-8 h-8 rounded-full bg-brand-wateal text-white flex items-center justify-center text-xs shadow-xs">
+                  <i class="fa-solid fa-microphone"></i>
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="text-xs text-slate-400 mt-3 flex items-center gap-1.5">
+            <i class="fa-solid fa-eye text-brand-600"></i>
+            Live Mockup tampilan smartphone WhatsApp
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================ -->
+    <!-- HALAMAN 3: CTA, HASIL, RIWAYAT & DUKUNGAN KREATOR            -->
+    <!-- ============================================================ -->
+    <section id="page3" class="step-card hidden max-w-6xl mx-auto space-y-10">
+      
+      <!-- Top Success Alert Banner -->
+      <div class="bg-gradient-to-r from-brand-600 to-emerald-600 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-brand-600/20 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
+        <div class="relative z-10">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold mb-3 backdrop-blur-xs">
+            <i class="fa-solid fa-circle-check"></i>
+            Tautan Siap Digunakan!
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">
+            WhatsApp Link Berhasil Dibuat
+          </h2>
+          <p class="text-white/80 text-xs sm:text-sm mt-1 max-w-xl">
+            Tautan telah dioptimalkan dan disimpan ke riwayat akun <strong id="ctaUserDisplayName" class="text-white underline">User</strong>.
+          </p>
+        </div>
+
+        <div class="flex items-center gap-3 relative z-10 shrink-0">
+          <button type="button" onclick="switchPage(2)" class="py-3 px-5 rounded-2xl bg-white text-brand-700 hover:bg-brand-50 text-xs sm:text-sm font-bold shadow-md transition active:scale-95 flex items-center gap-2">
+            <i class="fa-solid fa-plus"></i>
+            <span>Buat Link Baru</span>
+          </button>
+        </div>
+
+        <!-- Decorative background circles -->
+        <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
+      </div>
+
+      <!-- Main Result & QR Code Section -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- Left: Link Details & Actions (7 cols) -->
+        <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 space-y-6">
+          <div>
+            <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
+              Tautan WhatsApp Resmi (wa.me)
+            </label>
+            <div class="relative flex items-center">
+              <input 
+                type="text" 
+                id="ctaResultLinkInput" 
+                readonly 
+                class="w-full pl-10 pr-24 py-3.5 bg-slate-100/90 text-slate-800 rounded-2xl text-xs sm:text-sm font-mono border border-slate-200 focus:outline-hidden select-all font-medium"
+              >
+              <div class="absolute left-3.5 text-slate-400">
+                <i class="fa-solid fa-link text-sm"></i>
+              </div>
+              <button 
+                type="button" 
+                onclick="copyCtaLink()" 
+                class="absolute right-2 px-3.5 py-2 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center gap-1.5"
+              >
+                <i class="fa-regular fa-copy"></i>
+                <span id="copyBtnLabel">Salin</span>
+              </button>
+            </div>
+          </div>
+
+          <!-- Target & Message summary -->
+          <div class="p-4 rounded-2xl bg-slate-50 border border-slate-200/80 space-y-3">
+            <div class="flex items-center justify-between text-xs">
+              <span class="text-slate-500 font-medium">Nomor Tujuan:</span>
+              <span id="ctaSummaryPhone" class="font-bold text-slate-900 font-mono">+62...</span>
+            </div>
+            <div class="border-t border-slate-200/60 pt-2 text-xs">
+              <span class="text-slate-500 font-medium block mb-1">Isi Pesan:</span>
+              <p id="ctaSummaryMessage" class="text-slate-700 bg-white p-3 rounded-xl border border-slate-200 text-xs italic leading-relaxed whitespace-pre-wrap">
+                (Tanpa pesan pembuka)
+              </p>
+            </div>
+          </div>
+
+          <!-- Action buttons -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <a 
+              id="ctaOpenWaBtn" 
+              href="#" 
+              target="_blank" 
+              class="flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-brand-wa hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-500/20 active:scale-95 transition text-center"
+            >
+              <i class="fa-brands fa-whatsapp text-lg"></i>
+              <span>Buka di WhatsApp Langsung</span>
+            </a>
+
+            <button 
+              type="button" 
+              onclick="downloadGeneratedQr()" 
+              class="flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-slate-900/15 active:scale-95 transition"
+            >
+              <i class="fa-solid fa-download"></i>
+              <span>Unduh Gambar QR Code</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Right: Generated QR Box Preview (5 cols) -->
+        <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center text-center">
+          <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">QR Code Siap Cetak</span>
+          <h3 class="text-lg font-bold text-slate-900 mb-4">Pindai Langsung</h3>
+          
+          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 shadow-inner mb-4">
+            <div id="ctaQrcodeCanvas" class="bg-white p-2.5 rounded-xl shadow-xs"></div>
+          </div>
+
+          <p class="text-[11px] text-slate-500 leading-relaxed max-w-xs">
+            Scan dengan kamera HP untuk langsung memulai percakapan tanpa simpan nomor. Cocok untuk banner, kemasan, atau stiker toko.
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Minimalist & Non-intrusive Creator Support Section -->
+      <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3 text-center sm:text-left">
+          <div class="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-base shrink-0 border border-amber-200/50 dark:border-amber-900/50">
+            <i class="fa-solid fa-mug-saucer"></i>
+          </div>
+          <div>
+            <p class="text-xs font-semibold text-slate-800 dark:text-slate-200">
+              WALIG Pro bermanfaat untuk Anda?
+            </p>
+            <p class="text-[11px] text-slate-500 dark:text-slate-400">
+              Dukungan secangkir kopi sukarela sangat berarti untuk pemeliharaan server & layanan gratis ini.
+            </p>
+          </div>
+        </div>
+
+        <button 
+          type="button" 
+          onclick="openPaymentModal('Secangkir Kopi')" 
+          class="shrink-0 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 hover:bg-amber-50 dark:hover:bg-amber-950/30 hover:border-amber-300 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition active:scale-95 shadow-2xs flex items-center gap-1.5"
+        >
+          <i class="fa-solid fa-heart text-red-500 text-xs"></i>
+          <span>Traktir Kopi</span>
+        </button>
+      </div>
+
+      <!-- User Database Link History Section -->
+      <div class="bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-100">
+        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-6 border-b border-slate-100">
+          <div>
+            <h3 class="text-lg font-bold text-slate-900 flex items-center gap-2">
+              <i class="fa-solid fa-database text-brand-600"></i>
+              Riwayat Link atas nama: <span id="historyOwnerName" class="text-brand-700 underline">Pengguna</span>
+            </h3>
+            <p class="text-xs text-slate-500 mt-0.5">
+              Daftar tautan yang tersimpan di sesi akun Anda dan tersinkronisasi.
+            </p>
+          </div>
+          <button 
+            type="button" 
+            onclick="clearUserHistory()" 
+            class="text-xs text-red-500 hover:text-red-700 font-semibold px-3 py-1.5 rounded-xl hover:bg-red-50 border border-red-100 transition self-start sm:self-auto"
+          >
+            <i class="fa-regular fa-trash-can mr-1"></i> Bersihkan Riwayat Saya
+          </button>
+        </div>
+
+        <!-- History cards grid -->
+        <div id="userHistoryList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-6">
+          <!-- Dynamically populated via JS -->
+        </div>
+
+        <!-- Empty history state -->
+      <div id="emptyHistoryBox" class="text-center py-12">
+        <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-lg mx-auto mb-2">
+          <i class="fa-regular fa-folder-open"></i>
+        </div>
+        <p class="text-xs text-slate-500 font-medium">Belum ada tautan yang disimpan untuk akun ini.</p>
+      </div>
+    </div>
+
+  </section>
+
+  </main>
+
+  <!-- MODAL: Support / Donasi Kreator Pop-up (Clean & Polite) -->
+  <div id="paymentModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800 relative text-center">
+      <button type="button" onclick="closePaymentModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark text-sm"></i>
+      </button>
+
+      <div class="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 mx-auto flex items-center justify-center text-xl mb-3 shadow-2xs">
+        <i class="fa-solid fa-mug-hot"></i>
+      </div>
+
+      <h3 class="text-sm font-bold text-slate-900 dark:text-white" id="paymentModalTitle">Traktir Secangkir Kopi</h3>
+      <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="paymentModalSub">Terima kasih atas kebaikan dan apresiasi Anda!</p>
+
+      <!-- Simulated QRIS / Code Box -->
+      <div class="my-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
+        <div class="w-32 h-32 mx-auto bg-white p-2 rounded-xl shadow-xs border border-slate-200 flex items-center justify-center">
+          <i class="fa-solid fa-qrcode text-5xl text-slate-800"></i>
+        </div>
+        <p class="text-xs font-mono text-slate-700 dark:text-slate-300 mt-2 font-bold">QRIS / E-Wallet</p>
+        <p class="text-[10px] text-slate-400">Gopay, OVO, Dana, ShopeePay, Bank</p>
+      </div>
+
+      <button type="button" onclick="confirmPaymentSuccess()" class="w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold shadow-md shadow-brand-600/20 transition cursor-pointer">
+        Konfirmasi Terima Kasih ✨
+      </button>
+    </div>
+  </div>
+
+  <!-- Toast Notification -->
+  <div id="toastNotification" class="fixed bottom-6 right-6 z-50 transform translate-y-28 opacity-0 transition-all duration-300 pointer-events-none flex items-center gap-3 bg-slate-900 dark:bg-slate-800 text-white px-4 py-3 rounded-2xl shadow-2xl border border-slate-800 dark:border-slate-700 text-xs font-semibold">
+    <div id="toastIcon" class="w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs shrink-0">
+      <i class="fa-solid fa-check"></i>
+    </div>
+    <span id="toastMessage">Tautan WhatsApp berhasil disalin!</span>
+  </div>
+
+  <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-xs text-slate-500 dark:text-slate-400">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
+      <p>© 2026 Ldsr.studio.</p>
+      <div class="flex items-center flex-wrap gap-4">
+        <!-- Status integrasi otomatis GAS -->
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-semibold text-xs border border-emerald-200 dark:border-emerald-800 shadow-2xs" title="Terkoneksi langsung ke Google Spreadsheet via GAS">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
+          <span>GAS Cloud Sync Aktif</span>
+        </span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // ==============================================================================
+    // KONFIGURASI ENDPOINT GOOGLE APPS SCRIPT (GAS) TERKUNCI
+    // Endpoint ini terhubung otomatis ke Google Sheets dan hanya dapat diubah di kode ini:
+    // ==============================================================================
+    const GOOGLE_SHEETS_GAS_URL = "https://script.google.com/macros/s/AKfycbyoWWJN8GwVd0CUrFw13ovsk4yCxMZRHbuCmQAVy-4SAAaRmOjG5n838TyhuLdRXRkv/exec";
+
+    // ==============================================================================
+    // KONFIGURASI TAUTAN TOOLS UNTUK DIBAGIKAN (SHARE)
+    // Link ini dapat Anda edit langsung di bawah ini sesuai kebutuhan Anda:
+    // ==============================================================================
+    const SHARE_TOOL_URL = "https://s.id/WALinkGenerator";
+
+    const currentTheme = {
+      mode: 'light'
+    };
+
+    const appState = {
+      currentPage: 1,
+      currentUser: '',
+      isFollowedAndShared: false,
+      currentLink: {
+        countryCode: '62',
+        phoneRaw: '',
+        sanitizedPhone: '',
+        message: '',
+        url: ''
+      },
+      history: []
+    };
+
+    // Pre-made business message templates
+    const MESSAGE_TEMPLATES = {
+      order: "Halo Kak! Saya ingin melakukan pemesanan:\n- Nama Pemesan: \n- Pesanan Produk: \n- Jumlah: \n- Alamat Pengiriman: \nMohon info ketersediaan stok & total ongkir ya.",
+      cs: "Halo Tim Customer Service WALIG,\nSaya memiliki pertanyaan seputar layanan dan penawaran promo yang sedang aktif. Mohon dibantu, terima kasih!",
+      booking: "Halo Admin,\nSaya ingin melakukan booking jadwal konsultasi/reservasi:\n- Hari/Tanggal: \n- Atas Nama: \n- Jumlah Pax: \nMohon konfirmasi slot yang tersedia.",
+      inquiry: "Halo! Saya tertarik dengan penawaran produk Anda yang saya lihat di media sosial. Bisakah mengirimkan rincian katalog dan pricelist?"
+    };
+
+    let ctaQrInstance = null;
+    let toastTimer = null;
+
+    function initTheme() {
+      try {
+        const savedMode = localStorage.getItem('walig_theme_mode') || 'light';
+        setThemeMode(savedMode, false);
+      } catch(e) {
+        setThemeMode('light', false);
+      }
+    }
+
+    function toggleQuickTheme() {
+      const nextMode = currentTheme.mode === 'dark' ? 'light' : 'dark';
+      setThemeMode(nextMode, true);
+    }
+
+    function setThemeMode(mode, save = true) {
+      currentTheme.mode = mode;
+      const root = document.documentElement;
+      const quickIcon = document.getElementById('quickThemeIcon');
+
+      if (mode === 'dark') {
+        root.classList.add('dark');
+        if (quickIcon) {
+          quickIcon.className = 'fa-solid fa-sun text-sm text-amber-400';
+        }
+      } else {
+        root.classList.remove('dark');
+        if (quickIcon) {
+          quickIcon.className = 'fa-solid fa-moon text-sm text-slate-600';
+        }
+      }
+
+      if (save) {
+        try { localStorage.setItem('walig_theme_mode', mode); } catch(e) {}
+        showToast(`Mode ${mode === 'dark' ? 'Gelap' : 'Terang'} aktif.`);
+      }
+    }
+
+    // ==============================================================================
+    // GEMINI AI: GENERATOR TEMPLATE PESAN OTOMATIS
+    // ==============================================================================
+    async function generateAiTemplate() {
+      const promptInput = document.getElementById('aiPromptInput');
+      const roughIdea = promptInput.value.trim();
+      const tone = document.getElementById('aiToneSelect').value;
+      const btn = document.getElementById('btnAiGenerate');
+      const btnText = document.getElementById('aiBtnText');
+      const btnIcon = document.getElementById('aiBtnIcon');
+      const container = document.getElementById('aiSuggestionsContainer');
+      const resultsList = document.getElementById('aiResultsList');
+
+      if (!roughIdea) {
+        showToast('Tuliskan ide kasar pesan Anda terlebih dahulu!', 'warning');
+        promptInput.focus();
+        return;
+      }
+
+      // Set Loading State
+      btn.disabled = true;
+      btn.classList.add('opacity-75', 'cursor-not-allowed');
+      btnText.textContent = 'Memproses...';
+      btnIcon.className = 'fa-solid fa-spinner fa-spin text-[11px]';
+
+      const apiKey = "";
+      const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+
+      const systemPrompt = `Kamu adalah copywriter profesional untuk WhatsApp Marketing dan Customer Communication di Indonesia.
+Tugas: Buat 3 opsi template pesan WhatsApp yang siap pakai berdasarkan ide kasar pengguna.
+Format WhatsApp yang didukung:
+- Beri tanda *bold* pada kata kunci utama (nama promo, batas tanggal, produk, nominal)
+- Beri tanda _miring_ jika ada catatan halus
+- Gunakan emoji yang relevan dan natural
+- Buat kalimat sapaan pembuka dan Call-to-Action (CTA) penutup yang jelas
+Hasilkan array JSON berisi 3 objek dengan struktur schema yang diminta.`;
+
+      const userQuery = `Ide kasar pengguna: "${roughIdea}".
+Gaya / Nada bicara yang diinginkan: "${tone}".`;
+
+      const payload = {
+        contents: [
+          {
+            role: "user",
+            parts: [{ text: userQuery }]
+          }
+        ],
+        systemInstruction: {
+          parts: [{ text: systemPrompt }]
+        },
+        generationConfig: {
+          responseMimeType: "application/json",
+          responseSchema: {
+            type: "ARRAY",
+            items: {
+              type: "OBJECT",
+              properties: {
+                "title": { "type": "STRING", "description": "Judul variasi template yang ringkas" },
+                "tone": { "type": "STRING", "description": "Karakter gaya bahasa pesan ini" },
+                "message": { "type": "STRING", "description": "Teks pesan WhatsApp lengkap yang siap dikirimkan" }
+              },
+              "propertyOrdering": ["title", "tone", "message"]
+            }
+          }
+        }
+      };
+
+      try {
+        // Exponential backoff fetch
+        let response = null;
+        let delay = 1000;
+        for (let i = 0; i < 3; i++) {
+          try {
+            response = await fetch(apiUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
+            if (response.ok) break;
+            if (response.status === 429 || response.status >= 500) {
+              await new Promise(r => setTimeout(r, delay));
+              delay *= 2;
+              continue;
+            }
+            break;
+          } catch (fetchErr) {
+            if (i === 2) throw fetchErr;
+            await new Promise(r => setTimeout(r, delay));
+            delay *= 2;
+          }
+        }
+
+        if (!response || !response.ok) {
+          throw new Error('Gagal menghubungi AI');
+        }
+
+        const result = await response.json();
+        const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+        if (!jsonText) throw new Error('Respon AI kosong');
+
+        const templates = JSON.parse(jsonText);
+        if (!Array.isArray(templates) || templates.length === 0) {
+          throw new Error('Format respon tidak sesuai');
+        }
+
+        // Render hasil saran AI
+        resultsList.innerHTML = '';
+        templates.forEach((item, index) => {
+          const card = document.createElement('div');
+          card.className = 'p-3 rounded-xl bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 hover:border-brand-500 dark:hover:border-brand-500 transition space-y-2';
+          
+          card.innerHTML = `
+            <div class="flex items-center justify-between">
+              <span class="text-xs font-bold text-slate-800 dark:text-slate-100 flex items-center gap-1.5">
+                <span class="w-4 h-4 rounded-full bg-brand-100 text-brand-700 dark:bg-brand-900 dark:text-brand-300 text-[10px] flex items-center justify-center font-bold">${index + 1}</span>
+                ${escapeHtml(item.title || 'Opsi Pesan')}
+              </span>
+              <span class="text-[10px] text-slate-400 font-medium">${escapeHtml(item.tone || tone)}</span>
+            </div>
+            <p class="text-xs text-slate-600 dark:text-slate-300 whitespace-pre-wrap leading-relaxed font-sans bg-slate-50 dark:bg-slate-800/60 p-2 rounded-lg border border-slate-100 dark:border-slate-800">
+              ${escapeHtml(item.message)}
+            </p>
+            <div class="flex justify-end pt-1">
+              <button 
+                type="button" 
+                class="px-2.5 py-1 bg-brand-50 dark:bg-brand-950 hover:bg-brand-600 hover:text-white text-brand-700 dark:text-brand-300 rounded-lg text-xs font-bold transition flex items-center gap-1"
+                data-msg="${encodeURIComponent(item.message)}"
+                onclick="applyAiTemplate(this.dataset.msg)"
+              >
+                <i class="fa-solid fa-check text-[10px]"></i>
+                <span>Gunakan Pesan Ini</span>
+              </button>
+            </div>
+          `;
+          resultsList.appendChild(card);
+        });
+
+        container.classList.remove('hidden');
+        showToast('3 saran template pesan AI berhasil dibuat!');
+      } catch (err) {
+        showToast('Gagal memproses template AI. Silakan coba lagi sebentar.', 'warning');
+      } finally {
+        btn.disabled = false;
+        btn.classList.remove('opacity-75', 'cursor-not-allowed');
+        btnText.textContent = 'Ramu Pesan AI';
+        btnIcon.className = 'fa-solid fa-sparkles text-[11px]';
+      }
+    }
+
+    function applyAiTemplate(encodedMsg) {
+      const decoded = decodeURIComponent(encodedMsg);
+      document.getElementById('customMessage').value = decoded;
+      updateStudioPreview();
+      showToast('Pesan diterapkan ke formulir!');
+      window.scrollTo({
+        top: document.getElementById('customMessage').getBoundingClientRect().top + window.scrollY - 100,
+        behavior: 'smooth'
+      });
+    }
+
+    function escapeHtml(text) {
+      if (!text) return '';
+      return text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+    }
+
+
+    function toggleLandingFaq(index) {
+      const ans = document.getElementById(`faqAnswer-${index}`);
+      const icon = document.getElementById(`faqIcon-${index}`);
+      if (!ans) return;
+
+      const isHidden = ans.classList.contains('hidden');
+      if (isHidden) {
+        ans.classList.remove('hidden');
+        icon.classList.add('rotate-180');
+      } else {
+        ans.classList.add('hidden');
+        icon.classList.remove('rotate-180');
+      }
+    }
+
+    function switchPage(pageTarget) {
+      // Guard checking: cannot skip to step 2 or 3 without completing login & verification
+      if ((pageTarget === 2 || pageTarget === 3) && (!appState.currentUser || !appState.isFollowedAndShared)) {
+        showToast('Syarat mutlak: Anda wajib mengisi nama dan mencentang konfirmasi follow & share terlebih dahulu!', 'warning');
+        pageTarget = 1;
+      }
+
+      appState.currentPage = pageTarget;
+
+      // Hide all pages
+      document.getElementById('pageLanding').classList.add('hidden');
+      document.getElementById('page1').classList.add('hidden');
+      document.getElementById('page2').classList.add('hidden');
+      document.getElementById('page3').classList.add('hidden');
+
+      // Show selected page
+      if (pageTarget === 'landing') {
+        document.getElementById('pageLanding').classList.remove('hidden');
+      } else {
+        const targetEl = document.getElementById(`page${pageTarget}`);
+        if (targetEl) {
+          targetEl.classList.remove('hidden');
+        }
+      }
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Trigger specific page refresh
+      if (pageTarget === 2) {
+        document.getElementById('studioGreetingUser').textContent = appState.currentUser;
+        updateStudioPreview();
+      } else if (pageTarget === 3) {
+        refreshCtaPage();
+      }
+    }
+
+    function handleFollowCheckboxChange(el) {
+      const box = document.getElementById('followRequirementBox');
+      if (el.checked) {
+        box.classList.remove('border-red-400', 'bg-red-50/30');
+        box.classList.add('border-emerald-400', 'bg-emerald-50/30');
+      } else {
+        box.classList.remove('border-emerald-400', 'bg-emerald-50/30');
+      }
+    }
+
+    function shareCurrentTool() {
+      const shareUrl = SHARE_TOOL_URL;
+      const shareMessage = `Gunakan WALIG Pro - Generator Link WhatsApp Instan tanpa simpan nomor: ${shareUrl}`;
+      const temp = document.createElement('textarea');
+      temp.value = shareMessage;
+      temp.style.position = 'fixed';
+      temp.style.left = '-9999px';
+      document.body.appendChild(temp);
+      temp.select();
+      try {
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        
+        // Auto-check checkbox once user clicks share to smoothen the flow
+        const checkEl = document.getElementById('checkFollowShare');
+        if (checkEl && !checkEl.checked) {
+          checkEl.checked = true;
+          handleFollowCheckboxChange(checkEl);
+        }
+
+        showToast(`Tautan ${shareUrl} berhasil disalin! Silakan bagikan ke WhatsApp atau media sosial Anda.`);
+      } catch(e) {
+        document.body.removeChild(temp);
+        showToast('Gagal menyalin link.');
+      }
+    }
+
+    async function handleLoginSubmit(event) {
+      event.preventDefault();
+      const nameVal = document.getElementById('userNameInput').value.trim();
+      const checkVal = document.getElementById('checkFollowShare').checked;
+      const box = document.getElementById('followRequirementBox');
+
+      if (!nameVal) {
+        showToast('Mohon masukkan nama Anda.', 'warning');
+        document.getElementById('userNameInput').focus();
+        return;
+      }
+
+      // STRICT VALIDATION: Cannot proceed without follow & share
+      if (!checkVal) {
+        box.classList.add('border-red-400', 'bg-red-50/40', 'animate-pulse');
+        showToast('Syarat Mutlak: Anda belum mencentang konfirmasi telah follow & share!', 'warning');
+        document.getElementById('checkFollowShare').focus();
+        setTimeout(() => box.classList.remove('animate-pulse'), 1000);
+        return;
+      }
+
+      appState.currentUser = nameVal;
+      appState.isFollowedAndShared = true;
+
+      // Update Nav Badge
+      document.getElementById('navUserName').textContent = nameVal;
+      document.getElementById('navUserBadge').classList.remove('hidden');
+      document.getElementById('navUserBadge').classList.add('flex');
+
+      // Send telemetry to Google Apps Script (asynchronous)
+      sendDataToGAS({
+        type: 'login_event',
+        name: nameVal,
+        followedAndShared: true,
+        timestamp: new Date().toISOString()
+      });
+
+      showToast(`Verifikasi sukses. Selamat datang, ${nameVal}!`);
+      switchPage(2);
+    }
+
+    function handleLogout() {
+      appState.currentUser = '';
+      appState.isFollowedAndShared = false;
+      document.getElementById('userNameInput').value = '';
+      document.getElementById('checkFollowShare').checked = false;
+      document.getElementById('navUserBadge').classList.add('hidden');
+      document.getElementById('navUserBadge').classList.remove('flex');
+      const box = document.getElementById('followRequirementBox');
+      if (box) box.className = 'p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 transition-all space-y-2';
+      showToast('Anda telah keluar.');
+      switchPage(1);
+    }
+
+    async function sendDataToGAS(payload) {
+      if (!GOOGLE_SHEETS_GAS_URL) {
+        return;
+      }
+
+      try {
+        await fetch(GOOGLE_SHEETS_GAS_URL, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(payload)
+        });
+      } catch (err) {
+        console.warn('Gagal sinkronisasi ke endpoint GAS:', err);
+      }
+    }
+
+    function sanitizePhoneNumber(countryCode, inputPhone) {
+      if (!inputPhone) return '';
+      let cleaned = inputPhone.replace(/\D/g, '');
+
+      // If user typed with country code already (e.g. 62812...)
+      if (cleaned.startsWith(countryCode)) {
+        return cleaned;
+      }
+
+      // If starts with 0 (e.g. 0812...), trim leading zero
+      if (cleaned.startsWith('0')) {
+        cleaned = cleaned.substring(1);
+      }
+
+      return countryCode + cleaned;
+    }
+
+    function updateStudioPreview() {
+      const countryCode = document.getElementById('countryCode').value;
+      const rawPhone = document.getElementById('phoneNumber').value.trim();
+      const message = document.getElementById('customMessage').value;
+
+      // Handle clear button visibility
+      const clearBtn = document.getElementById('clearPhoneBtn');
+      if (rawPhone.length > 0) clearBtn.classList.remove('hidden');
+      else clearBtn.classList.add('hidden');
+
+      const sanitized = sanitizePhoneNumber(countryCode, rawPhone);
+      appState.currentLink.countryCode = countryCode;
+      appState.currentLink.phoneRaw = rawPhone;
+      appState.currentLink.sanitizedPhone = sanitized;
+      appState.currentLink.message = message;
+
+      // Build target URL
+      if (sanitized) {
+        const encText = encodeURIComponent(message);
+        appState.currentLink.url = encText 
+          ? `https://wa.me/${sanitized}?text=${encText}`
+          : `https://wa.me/${sanitized}`;
+      } else {
+        const encText = encodeURIComponent(message);
+        appState.currentLink.url = encText 
+          ? `https://wa.me/?text=${encText}`
+          : `https://wa.me/`;
+      }
+
+      // Character counter
+      document.getElementById('charCounter').textContent = `${message.length} karakter`;
+
+      // Live header & bubble
+      const headerEl = document.getElementById('previewTargetHeader');
+      headerEl.textContent = sanitized ? `+${sanitized}` : 'Nomor Bisnis';
+
+      const bubbleEl = document.getElementById('previewMessageBubble');
+      bubbleEl.innerHTML = formatMarkdownPreview(message);
+
+      // Device time
+      const now = new Date();
+      const h = String(now.getHours()).padStart(2, '0');
+      const m = String(now.getMinutes()).padStart(2, '0');
+      document.getElementById('previewClock').textContent = `${h}:${m}`;
+    }
+
+    function formatMarkdownPreview(text) {
+      if (!text) return 'Pesan Anda akan tampil di sini secara live saat mengetik...';
+      let clean = text
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;');
+
+      // WhatsApp format replacements
+      clean = clean.replace(/\*(.*?)\*/g, '<strong class="font-bold">$1</strong>');
+      clean = clean.replace(/_(.*?)_/g, '<em class="italic">$1</em>');
+      clean = clean.replace(/~(.*?)~/g, '<span class="line-through">$1</span>');
+      return clean;
+    }
+
+    function insertFormatting(wrapper) {
+      const textarea = document.getElementById('customMessage');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const val = textarea.value;
+      const selected = val.substring(start, end) || 'teks';
+      const replacement = `${wrapper}${selected}${wrapper}`;
+      
+      textarea.value = val.substring(0, start) + replacement + val.substring(end);
+      textarea.focus();
+      textarea.setSelectionRange(start + wrapper.length, start + wrapper.length + selected.length);
+      updateStudioPreview();
+    }
+
+    function insertEmoji(emoji) {
+      const textarea = document.getElementById('customMessage');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const val = textarea.value;
+
+      textarea.value = val.substring(0, start) + emoji + val.substring(end);
+      textarea.focus();
+      textarea.setSelectionRange(start + emoji.length, start + emoji.length);
+      updateStudioPreview();
+    }
+
+    function useTemplate(key) {
+      if (MESSAGE_TEMPLATES[key]) {
+        document.getElementById('customMessage').value = MESSAGE_TEMPLATES[key];
+        updateStudioPreview();
+        showToast('Template pesan berhasil dimasukkan!');
+      }
+    }
+
+    function resetGeneratorForm() {
+      document.getElementById('phoneNumber').value = '';
+      document.getElementById('customMessage').value = '';
+      document.getElementById('countryCode').value = '62';
+      updateStudioPreview();
+      showToast('Formulir dibersihkan.');
+    }
+
+    function processAndProceedToStep3() {
+      if (!appState.currentLink.sanitizedPhone || appState.currentLink.sanitizedPhone.length < 5) {
+        showToast('Harap masukkan nomor WhatsApp yang valid terlebih dahulu!');
+        document.getElementById('phoneNumber').focus();
+        return;
+      }
+
+      // Save record to local user database
+      saveLinkToUserDatabase();
+
+      // Send log to GAS
+      sendDataToGAS({
+        type: 'generate_link',
+        name: appState.currentUser,
+        phone: appState.currentLink.sanitizedPhone,
+        message: appState.currentLink.message,
+        url: appState.currentLink.url,
+        timestamp: new Date().toISOString()
+      });
+
+      // Switch to Page 3
+      switchPage(3);
+    }
+
+    function refreshCtaPage() {
+      document.getElementById('ctaUserDisplayName').textContent = appState.currentUser;
+      document.getElementById('historyOwnerName').textContent = appState.currentUser;
+      document.getElementById('ctaResultLinkInput').value = appState.currentLink.url;
+      document.getElementById('ctaSummaryPhone').textContent = `+${appState.currentLink.sanitizedPhone}`;
+      document.getElementById('ctaSummaryMessage').textContent = appState.currentLink.message || '(Tanpa pesan pembuka)';
+      document.getElementById('ctaOpenWaBtn').href = appState.currentLink.url;
+
+      // Render QR Code in CTA Box
+      const qrContainer = document.getElementById('ctaQrcodeCanvas');
+      qrContainer.innerHTML = '';
+      ctaQrInstance = new QRCode(qrContainer, {
+        text: appState.currentLink.url,
+        width: 170,
+        height: 170,
+        colorDark : "#0f172a",
+        colorLight : "#ffffff",
+        correctLevel : QRCode.CorrectLevel.H
+      });
+
+      renderUserHistoryCards();
+    }
+
+    function copyCtaLink() {
+      const link = document.getElementById('ctaResultLinkInput').value;
+      if (!link) return;
+
+      const temp = document.createElement('textarea');
+      temp.value = link;
+      temp.style.position = 'fixed';
+      temp.style.left = '-9999px';
+      document.body.appendChild(temp);
+      temp.select();
+      try {
+        document.execCommand('copy');
+        document.body.removeChild(temp);
+        
+        const label = document.getElementById('copyBtnLabel');
+        label.textContent = 'Tersalin!';
+        setTimeout(() => { label.textContent = 'Salin'; }, 2000);
+
+        showToast('Link WhatsApp berhasil disalin ke papan klip!');
+      } catch(e) {
+        document.body.removeChild(temp);
+        showToast('Gagal menyalin link.');
+      }
+    }
+
+    function downloadGeneratedQr() {
+      const container = document.getElementById('ctaQrcodeCanvas');
+      const img = container.querySelector('img');
+      const canvas = container.querySelector('canvas');
+      let dataUrl = img && img.src ? img.src : (canvas ? canvas.toDataURL("image/png") : '');
+
+      if (!dataUrl) {
+        showToast('Gagal mengunduh QR Code.');
+        return;
+      }
+
+      const a = document.createElement('a');
+      a.download = `wa-qr-${appState.currentLink.sanitizedPhone || 'link'}.png`;
+      a.href = dataUrl;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      showToast('Gambar QR Code berhasil diunduh!');
+    }
+
+    function saveLinkToUserDatabase() {
+      const entry = {
+        id: Date.now(),
+        user: appState.currentUser,
+        phone: appState.currentLink.sanitizedPhone,
+        message: appState.currentLink.message || '(Tanpa pesan)',
+        url: appState.currentLink.url,
+        date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
+      };
+
+      // Filter duplicates of same URL for this user
+      appState.history = appState.history.filter(item => !(item.user === appState.currentUser && item.url === entry.url));
+      appState.history.unshift(entry);
+
+      // Keep latest 9 items per user
+      if (appState.history.length > 25) {
+        appState.history = appState.history.slice(0, 25);
+      }
+
+      try {
+        localStorage.setItem('WALIG_db_history', JSON.stringify(appState.history));
+      } catch(e) {}
+    }
+
+    function renderUserHistoryCards() {
+      const listEl = document.getElementById('userHistoryList');
+      const emptyEl = document.getElementById('emptyHistoryBox');
+
+      // Filter history for current user only
+      const userItems = appState.history.filter(item => item.user === appState.currentUser);
+
+      if (userItems.length === 0) {
+        emptyEl.classList.remove('hidden');
+        listEl.innerHTML = '';
+        return;
+      }
+
+      emptyEl.classList.add('hidden');
+      listEl.innerHTML = '';
+
+      userItems.forEach(item => {
+        const card = document.createElement('div');
+        card.className = 'bg-slate-50 hover:bg-slate-100/90 border border-slate-200/80 rounded-2xl p-4 transition flex flex-col justify-between';
+        card.innerHTML = `
+          <div>
+            <div class="flex items-center justify-between mb-2">
+              <span class="text-xs font-bold text-slate-900 flex items-center gap-1">
+                <i class="fa-brands fa-whatsapp text-brand-600"></i>
+                +${item.phone}
+              </span>
+              <span class="text-[10px] text-slate-400">${item.date}</span>
+            </div>
+            <p class="text-[11px] text-slate-600 line-clamp-2 bg-white p-2.5 rounded-xl border border-slate-200/60 mb-3 italic">
+              "${item.message}"
+            </p>
+          </div>
+          <div class="flex items-center gap-2 pt-2 border-t border-slate-200/60">
+            <button type="button" onclick="copyCustomText('${item.url}')" class="flex-1 py-1.5 px-2 bg-white hover:bg-brand-50 hover:text-brand-700 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold flex items-center justify-center gap-1 transition">
+              <i class="fa-regular fa-copy text-[11px]"></i> Salin
+            </button>
+            <a href="${item.url}" target="_blank" class="py-1.5 px-3 bg-brand-wa hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold flex items-center justify-center transition" title="Buka">
+              <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
+            </a>
+            <button type="button" onclick="deleteHistoryItem(${item.id})" class="py-1.5 px-2 text-slate-400 hover:text-red-500 rounded-xl transition" title="Hapus">
+              <i class="fa-regular fa-trash-can text-xs"></i>
+            </button>
+          </div>
+        `;
+        listEl.appendChild(card);
+      });
+    }
+
+    function copyCustomText(text) {
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      temp.style.position = 'fixed';
+      temp.style.left = '-9999px';
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+      showToast('Tautan dari riwayat berhasil disalin!');
+    }
+
+    function deleteHistoryItem(id) {
+      appState.history = appState.history.filter(item => item.id !== id);
+      try {
+        localStorage.setItem('WALIG_db_history', JSON.stringify(appState.history));
+      } catch(e) {}
+      renderUserHistoryCards();
+      showToast('Item riwayat dihapus.');
+    }
+
+    function clearUserHistory() {
+      appState.history = appState.history.filter(item => item.user !== appState.currentUser);
+      try {
+        localStorage.setItem('WALIG_db_history', JSON.stringify(appState.history));
+      } catch(e) {}
+      renderUserHistoryCards();
+      showToast(`Semua riwayat untuk ${appState.currentUser} telah dibersihkan.`);
+    }
+
+    function triggerDonationCelebration(tierName) {
+      // Trigger canvas confetti celebration
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 80,
+          spread: 70,
+          origin: { y: 0.6 }
+        });
+      }
+
+      openPaymentModal(tierName);
+    }
+
+    function openPaymentModal(title) {
+      document.getElementById('paymentModalTitle').textContent = `Dukungan: ${title}`;
+      document.getElementById('paymentModal').classList.remove('hidden');
+    }
+
+    function closePaymentModal() {
+      document.getElementById('paymentModal').classList.add('hidden');
+    }
+
+    function confirmPaymentSuccess() {
+      closePaymentModal();
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 100,
+          origin: { y: 0.5 }
+        });
+      }
+      showToast('Terima kasih banyak atas traktiran dan dukungan Anda! ✨');
+    }
+
+    function showToast(msg, type = 'success') {
+      const toast = document.getElementById('toastNotification');
+      const toastMessage = document.getElementById('toastMessage');
+      const toastIcon = document.getElementById('toastIcon');
+
+      toastMessage.textContent = msg;
+
+      if (type === 'warning') {
+        toastIcon.className = 'w-6 h-6 rounded-full bg-amber-500 text-white flex items-center justify-center text-xs shrink-0';
+        toastIcon.innerHTML = '<i class="fa-solid fa-exclamation"></i>';
+      } else {
+        toastIcon.className = 'w-6 h-6 rounded-full bg-brand-500 text-white flex items-center justify-center text-xs shrink-0';
+        toastIcon.innerHTML = '<i class="fa-solid fa-check"></i>';
+      }
+
+      toast.classList.remove('translate-y-28', 'opacity-0');
+      toast.classList.add('translate-y-0', 'opacity-100');
+
+      if (toastTimer) clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => {
+        toast.classList.remove('translate-y-0', 'opacity-100');
+        toast.classList.add('translate-y-28', 'opacity-0');
+      }, 3000);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      // Load saved database history
+      try {
+        const storedHist = localStorage.getItem('WALIG_db_history');
+        if (storedHist) appState.history = JSON.parse(storedHist);
+      } catch(e) {
+        appState.history = [];
+      }
+
+      // Studio inputs listeners
+      document.getElementById('countryCode').addEventListener('change', updateStudioPreview);
+      document.getElementById('phoneNumber').addEventListener('input', updateStudioPreview);
+      document.getElementById('customMessage').addEventListener('input', updateStudioPreview);
+
+      // Clear phone button
+      document.getElementById('clearPhoneBtn').addEventListener('click', () => {
+        document.getElementById('phoneNumber').value = '';
+        updateStudioPreview();
+      });
+
+      // Modal outside click listener
+      document.getElementById('paymentModal').addEventListener('click', (e) => {
+        if (e.target.id === 'paymentModal') closePaymentModal();
+      });
+
+      // Initialize theme system
+      initTheme();
+
+      // Start on Step 1
+      switchPage(1);
+    });
+  </script>
+</body>
+</html>
