@@ -10,16 +10,16 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   
-  <!-- FontAwesome Icons -->
+  <!-- FontAwesome 6 Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
   
-  <!-- Tailwind CSS -->
+  <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
   
-  <!-- QRCode.js Library -->
+  <!-- QRCode.js CDN -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
 
-  <!-- Canvas Confetti Library for Support & Donation Animations -->
+  <!-- Canvas Confetti CDN -->
   <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 
   <script>
@@ -32,41 +32,24 @@
           },
           colors: {
             brand: {
-              50: 'var(--brand-50, #f0fdf4)',
-              100: 'var(--brand-100, #dcfce7)',
-              200: 'var(--brand-200, #bbf7d0)',
-              500: 'var(--brand-500, #22c55e)',
-              600: 'var(--brand-600, #16a34a)',
-              700: 'var(--brand-700, #15803d)',
+              50: '#f0fdf4',
+              100: '#dcfce7',
+              200: '#bbf7d0',
+              500: '#22c55e',
+              600: '#16a34a',
+              700: '#15803d',
               wa: '#25D366',
               wadark: '#075E54',
               wateal: '#128C7E',
               walight: '#DCF8C6'
-            }
-          },
-          animation: {
-            'pulse-subtle': 'pulse 3s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-            'float': 'floating 3s ease-in-out infinite'
-          },
-          keyframes: {
-            floating: {
-              '0%, 100%': { transform: 'translateY(0px)' },
-              '50%': { transform: 'translateY(-6px)' }
             }
           }
         }
       }
     }
   </script>
+
   <style>
-    :root {
-      --brand-50: #f0fdf4;
-      --brand-100: #dcfce7;
-      --brand-200: #bbf7d0;
-      --brand-500: #22c55e;
-      --brand-600: #16a34a;
-      --brand-700: #15803d;
-    }
     html.dark body {
       background-color: #0b0f19;
       color: #f1f5f9;
@@ -144,11 +127,14 @@
     }
   </style>
 </head>
-<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-600 selection:text-white min-h-screen flex flex-col justify-between">
+<body class="bg-slate-50 text-slate-800 font-sans antialiased selection:bg-brand-600 selection:text-white min-h-screen flex flex-col justify-between relative">
 
-  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-xs">
+  <!-- ============================================================ -->
+  <!-- HEADER NAVIGATION                                            -->
+  <!-- ============================================================ -->
+  <header class="sticky top-0 z-40 bg-white/95 backdrop-blur-md border-b border-slate-100 shadow-sm">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
-      <!-- Logo langsung mengarah ke Landing Page / Home -->
+      <!-- Logo ke Landing Page -->
       <div class="flex items-center gap-3 cursor-pointer select-none" onclick="switchPage('landing')" title="WALIG Pro - Ke Beranda">
         <div class="w-10 h-10 rounded-2xl bg-gradient-to-tr from-brand-700 via-brand-600 to-brand-wa flex items-center justify-center text-white shadow-md shadow-brand-600/20">
           <i class="fa-brands fa-whatsapp text-2xl"></i>
@@ -156,12 +142,12 @@
         <div>
           <span class="text-lg sm:text-xl font-extrabold tracking-tight text-slate-900 flex items-center">
             WhatsApp <span class="text-brand-600">Link Generator</span>
-            <span class="ml-2 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Suite</span>
+            <span class="ml-2 text-[10px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-emerald-100 text-emerald-800 border border-emerald-200">Pro</span>
           </span>
         </div>
       </div>
 
-      <!-- User status indicator & Navigation -->
+      <!-- Navigation & Action Group -->
       <div class="flex items-center gap-3">
         <div id="navUserBadge" class="hidden items-center gap-2 bg-slate-100 dark:bg-slate-800 py-1.5 px-3 rounded-full border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300">
           <div class="w-2 h-2 rounded-full bg-brand-500 animate-pulse"></div>
@@ -171,12 +157,12 @@
           </button>
         </div>
 
-        <!-- Quick 1-Click Dark/Light Mode Toggle -->
+        <!-- Tombol Beralih Mode Gelap/Terang -->
         <button 
           type="button" 
           id="quickThemeBtn" 
           onclick="toggleQuickTheme()" 
-          class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition active:scale-95 shadow-2xs" 
+          class="w-9 h-9 rounded-xl flex items-center justify-center text-slate-700 dark:text-slate-200 bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 border border-slate-200 dark:border-slate-700 transition active:scale-95 shadow-sm cursor-pointer" 
           title="Beralih Mode Gelap/Terang"
         >
           <i id="quickThemeIcon" class="fa-solid fa-moon text-sm text-slate-600 dark:text-amber-400"></i>
@@ -185,18 +171,19 @@
     </div>
   </header>
 
-  <!-- Note: Stepper bar has been removed to keep the interface completely clean and distraction-free -->
-
+  <!-- ============================================================ -->
+  <!-- MAIN CONTENT CONTAINER                                       -->
+  <!-- ============================================================ -->
   <main class="flex-1 py-8 sm:py-12 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto w-full">
 
     <!-- ============================================================ -->
     <!-- HALAMAN KHUSUS: LANDING PAGE & PANDUAN LENGKAP               -->
     <!-- ============================================================ -->
-    <section id="pageLanding" class="step-card hidden max-w-5xl mx-auto space-y-16 animate-in fade-in duration-300">
+    <section id="pageLanding" class="step-card hidden max-w-5xl mx-auto space-y-16">
       
       <!-- Hero Section -->
       <div class="text-center space-y-5 pt-4">
-        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100 text-brand-800 text-xs font-extrabold shadow-2xs border border-brand-200">
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-brand-100 text-brand-800 text-xs font-extrabold shadow-sm border border-brand-200">
           <i class="fa-solid fa-bolt text-brand-600"></i>
           Platform Generator Link WhatsApp Bisnis & Pribadi #1 Indonesia
         </div>
@@ -211,37 +198,37 @@
         </p>
 
         <div class="pt-2 flex flex-wrap items-center justify-center gap-3">
-          <button type="button" onclick="switchPage(1)" class="py-3.5 px-7 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-xl shadow-brand-600/30 transition active:scale-95 flex items-center gap-2">
+          <button type="button" onclick="switchPage(1)" class="py-3.5 px-7 rounded-2xl bg-brand-600 hover:bg-brand-700 text-white font-bold text-sm shadow-xl shadow-brand-600/30 transition active:scale-95 flex items-center gap-2 cursor-pointer">
             <span>Mulai Buat Link Gratis</span>
             <i class="fa-solid fa-arrow-right text-xs"></i>
           </button>
-          <a href="#landingFeatures" class="py-3.5 px-5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-sm transition shadow-2xs">
+          <a href="#landingFeatures" class="py-3.5 px-5 rounded-2xl bg-white border border-slate-200 hover:bg-slate-50 text-slate-700 font-semibold text-sm transition shadow-sm">
             Eksplorasi Fitur
           </a>
         </div>
 
-        <!-- Social Proof Stats Badges -->
+        <!-- Social Proof Badges -->
         <div class="pt-6 grid grid-cols-2 sm:grid-cols-4 gap-3 max-w-3xl mx-auto text-left">
-          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-xs">
-            <span class="block text-xl font-black text-slate-900">45.000+</span>
+          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <span class="block text-xl font-black text-slate-900">50.000+</span>
             <span class="text-[11px] font-semibold text-slate-500">Tautan Dibuat</span>
           </div>
-          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-xs">
+          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-sm">
             <span class="block text-xl font-black text-emerald-600">3 Detik</span>
-            <span class="text-[11px] font-semibold text-slate-500">Proses Generate</span>
+            <span class="text-[11px] font-semibold text-slate-500">Proses Cepat</span>
           </div>
-          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-xs">
+          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-sm">
             <span class="block text-xl font-black text-brand-600">100%</span>
             <span class="text-[11px] font-semibold text-slate-500">Gratis & Bebas Kuota</span>
           </div>
-          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-xs">
-            <span class="block text-xl font-black text-teal-600">0 Data</span>
-            <span class="text-[11px] font-semibold text-slate-500">Privasi Terjaga Aman</span>
+          <div class="p-3.5 bg-white rounded-2xl border border-slate-100 shadow-sm">
+            <span class="block text-xl font-black text-teal-600">0 Log</span>
+            <span class="text-[11px] font-semibold text-slate-500">Privasi Aman Terlindungi</span>
           </div>
         </div>
       </div>
 
-      <!-- Fitur Unggulan Lengkap -->
+      <!-- Features Grid -->
       <div id="landingFeatures" class="space-y-6">
         <div class="text-center max-w-xl mx-auto">
           <span class="text-xs font-extrabold uppercase tracking-wider text-brand-600">Keunggulan WALIG Pro</span>
@@ -254,7 +241,7 @@
             <div class="w-12 h-12 rounded-2xl bg-emerald-100 text-emerald-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
               <i class="fa-solid fa-wand-magic-sparkles"></i>
             </div>
-            <h3 class="font-bold text-base text-slate-900 mb-1.5">Auto-Format Standar Internasional</h3>
+            <h3 class="font-bold text-base text-slate-900 mb-1.5">Auto-Format Nomor Internasional</h3>
             <p class="text-xs text-slate-600 leading-relaxed">
               Ketik nomor sesuka Anda (<code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">0812...</code> atau <code class="bg-slate-100 px-1 py-0.5 rounded text-[11px]">62812...</code>). Sistem otomatis memangkas angka 0 di depan dan memadukan kode negara secara presisi.
             </p>
@@ -264,7 +251,7 @@
             <div class="w-12 h-12 rounded-2xl bg-brand-100 text-brand-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
               <i class="fa-solid fa-mobile-screen"></i>
             </div>
-            <h3 class="font-bold text-base text-slate-900 mb-1.5">Live Mockup WhatsApp Smartphone</h3>
+            <h3 class="font-bold text-base text-slate-900 mb-1.5">Live Mockup Smartphone WhatsApp</h3>
             <p class="text-xs text-slate-600 leading-relaxed">
               Pratinjau tampilan pesan secara langsung di layar smartphone virtual sebelum link disebarkan. Lengkap dengan format teks tebal, miring, dan jam real-time.
             </p>
@@ -276,141 +263,7 @@
             </div>
             <h3 class="font-bold text-base text-slate-900 mb-1.5">QR Code Resolusi Tinggi (Siap Cetak)</h3>
             <p class="text-xs text-slate-600 leading-relaxed">
-              Hasilkan gambar QR Code berformat PNG dengan sekali klik. Siap ditempel di brosur fisik, kartu nama, etalase kasir toko, hingga kemasan paket (packaging).
-            </p>
-          </div>
-
-          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
-            <div class="w-12 h-12 rounded-2xl bg-blue-100 text-blue-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-              <i class="fa-solid fa-file-lines"></i>
-            </div>
-            <h3 class="font-bold text-base text-slate-900 mb-1.5">Template Pesan Bisnis Populer</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Hemat waktu dengan 4 template siap pakai: Format Order Olshop, Pertanyaan Customer Care, Reservasi Jadwal, dan Konsultasi Layanan Jasa.
-            </p>
-          </div>
-
-          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
-            <div class="w-12 h-12 rounded-2xl bg-purple-100 text-purple-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-              <i class="fa-solid fa-database"></i>
-            </div>
-            <h3 class="font-bold text-base text-slate-900 mb-1.5">Riwayat Personal Terkategori</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Tautan yang telah Anda rancang otomatis tersimpan di sesi akun Anda. Salin ulang atau kelola daftar tautan tanpa perlu mengetik ulang pesan dari nol.
-            </p>
-          </div>
-
-          <div class="bg-white p-6 rounded-3xl border border-slate-100 shadow-xl shadow-slate-200/40 hover:border-brand-300 transition group">
-            <div class="w-12 h-12 rounded-2xl bg-teal-100 text-teal-600 flex items-center justify-center text-xl mb-4 group-hover:scale-110 transition">
-              <i class="fa-solid fa-shield-halved"></i>
-            </div>
-            <h3 class="font-bold text-base text-slate-900 mb-1.5">Aman, Ringan & Tanpa Iklan Mengganggu</h3>
-            <p class="text-xs text-slate-600 leading-relaxed">
-              Dijalankan langsung di browser Anda dengan proteksi privasi. Tidak memerlukan instalasi aplikasi tambahan atau pendaftaran kartu kredit.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Studi Kasus & Contoh Penggunaan (Use Cases) -->
-      <div class="bg-gradient-to-b from-slate-900 to-slate-950 text-white rounded-3xl p-8 sm:p-12 shadow-2xl space-y-8">
-        <div class="text-center max-w-xl mx-auto space-y-2">
-          <span class="text-xs font-extrabold uppercase tracking-widest text-emerald-400">Penerapan Nyata</span>
-          <h2 class="text-2xl sm:text-3xl font-black tracking-tight">Cocok untuk Segala Kebutuhan Digital</h2>
-          <p class="text-xs sm:text-sm text-slate-400">Lihat bagaimana para praktisi bisnis memanfaatkan WALIG Pro.</p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-          <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-9 h-9 rounded-xl bg-emerald-500/20 text-emerald-400 flex items-center justify-center font-bold">
-                <i class="fa-solid fa-cart-shopping"></i>
-              </div>
-              <h4 class="font-bold text-sm text-white">Toko Online & E-Commerce</h4>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Pasang link di Bio Instagram atau TikTok dengan template <span class="text-emerald-300">"Halo Admin, saya ingin pesan Produk X, Jumlah 2 pcs"</span>. Pembeli langsung terarah ke format rapi tanpa bolak-balik tanya harga.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-9 h-9 rounded-xl bg-amber-500/20 text-amber-400 flex items-center justify-center font-bold">
-                <i class="fa-solid fa-utensils"></i>
-              </div>
-              <h4 class="font-bold text-sm text-white">Restoran, Cafe & Katering</h4>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Cetak QR Code di atas meja kasir atau brosur menu. Pengunjung cukup scan kamera HP untuk reservasi tempat duduk atau request pesanan catering langsung ke WhatsApp manager.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-9 h-9 rounded-xl bg-blue-500/20 text-blue-400 flex items-center justify-center font-bold">
-                <i class="fa-solid fa-briefcase"></i>
-              </div>
-              <h4 class="font-bold text-sm text-white">Konsultan, Notaris & Agen Properti</h4>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Buat link jadwal konsultasi personal. Calon klien tidak canggung memulai percakapan karena subjek dan sapaan awal sudah terisi secara profesional.
-            </p>
-          </div>
-
-          <div class="p-6 rounded-2xl bg-white/5 border border-white/10 hover:border-emerald-500/40 transition">
-            <div class="flex items-center gap-3 mb-3">
-              <div class="w-9 h-9 rounded-xl bg-purple-500/20 text-purple-400 flex items-center justify-center font-bold">
-                <i class="fa-solid fa-calendar-check"></i>
-              </div>
-              <h4 class="font-bold text-sm text-white">Webinar, Event & Komunitas</h4>
-            </div>
-            <p class="text-xs text-slate-300 leading-relaxed">
-              Sertakan tautan di email blast atau pamflet digital. Peserta yang menemui kendala login atau verifikasi tiket dapat langsung menghubungi PIC panitia dengan 1 ketukan.
-            </p>
-          </div>
-        </div>
-      </div>
-
-      <!-- Tips WhatsApp Marketing & Panduan Format Teks -->
-      <div class="bg-white rounded-3xl p-8 sm:p-10 border border-slate-100 shadow-xl shadow-slate-200/50 space-y-6">
-        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-slate-100 pb-5">
-          <div>
-            <span class="text-xs font-bold uppercase tracking-wider text-brand-600">Knowledge Base</span>
-            <h3 class="text-xl sm:text-2xl font-black text-slate-900 mt-1">Tips WhatsApp Copywriting yang Menghasilkan Order</h3>
-          </div>
-          <span class="self-start sm:self-auto px-3 py-1 bg-brand-50 text-brand-700 text-xs font-bold rounded-full border border-brand-200">
-            Formula CTR Tinggi
-          </span>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-5 text-xs text-slate-600">
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
-            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">1</span>
-              Sapaan Hangat & Spesifik
-            </div>
-            <p class="leading-relaxed">
-              Sebutkan sumber calon pembeli mendapatkan link, misal: <em class="text-slate-800">"Halo Admin, saya lihat promo dari Instagram..."</em>. Ini memudahkan tim CS memetakan kanal promosi paling efektif.
-            </p>
-          </div>
-
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
-            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">2</span>
-              Manfaatkan Format Teks
-            </div>
-            <p class="leading-relaxed">
-              Gunakan tanda bintang (<code class="font-mono bg-white px-1 border">*Tebal*</code>) untuk nama produk atau batas promo, dan garis bawah (<code class="font-mono bg-white px-1 border">_Miring_</code>) untuk detail catatan. Teks berformat 2x lebih mudah dibaca sekilas.
-            </p>
-          </div>
-
-          <div class="p-4 bg-slate-50 rounded-2xl border border-slate-100 space-y-2">
-            <div class="font-bold text-slate-900 text-sm flex items-center gap-2">
-              <span class="w-6 h-6 rounded-full bg-brand-600 text-white flex items-center justify-center text-[10px]">3</span>
-              Pancing Respon Cepat (CTA)
-            </div>
-            <p class="leading-relaxed">
-              Akhiri pesan dengan kalimat tanya sederhana seperti: <em class="text-slate-800">"Apakah stok warna biru masih ada kak?"</em>. Pertanyaan memicu kewajiban bawah sadar admin untuk membalas segera.
+              Hasilkan gambar QR Code berformat PNG dengan sekali klik. Siap ditempel di brosur fisik, kartu nama, etalase kasir toko, hingga kemasan paket produk.
             </p>
           </div>
         </div>
@@ -424,51 +277,35 @@
         </div>
 
         <div class="space-y-3 max-w-3xl mx-auto" id="landingFaqContainer">
-          
-          <!-- FAQ 1 -->
           <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all">
-            <button type="button" onclick="toggleLandingFaq(1)" class="w-full p-4.5 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm">
+            <button type="button" onclick="toggleLandingFaq(1)" class="w-full p-4 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm cursor-pointer">
               <span>Apakah layanan WALIG Pro ini benar-benar gratis?</span>
               <i id="faqIcon-1" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
             </button>
-            <div id="faqAnswer-1" class="hidden p-4.5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+            <div id="faqAnswer-1" class="hidden p-4 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
               Ya, 100% gratis tanpa biaya tersembunyi, tanpa batas jumlah link yang dibuat, dan tanpa batasan masa berlaku. Tautan <code class="bg-slate-100 px-1 py-0.5 rounded text-brand-700">wa.me</code> yang dihasilkan adalah tautan resmi dari WhatsApp sehingga akan aktif selamanya selama nomor tujuan tetap aktif.
             </div>
           </div>
 
-          <!-- FAQ 2 -->
           <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all">
-            <button type="button" onclick="toggleLandingFaq(2)" class="w-full p-4.5 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm">
+            <button type="button" onclick="toggleLandingFaq(2)" class="w-full p-4 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm cursor-pointer">
               <span>Mengapa ada syarat wajib follow & membagikan link tools ini?</span>
               <i id="faqIcon-2" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
             </button>
-            <div id="faqAnswer-2" class="hidden p-4.5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+            <div id="faqAnswer-2" class="hidden p-4 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
               WALIG Pro didedikasikan sebagai software gratis untuk memajukan sesama pegiat UMKM, digital marketer, dan pebisnis online. Konfirmasi follow dan share adalah bentuk gotong royong agar lebih banyak rekan wirausaha di luar sana yang terbantu tanpa perlu membayar software berbayar mahal.
             </div>
           </div>
 
-          <!-- FAQ 3 -->
           <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all">
-            <button type="button" onclick="toggleLandingFaq(3)" class="w-full p-4.5 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm">
+            <button type="button" onclick="toggleLandingFaq(3)" class="w-full p-4 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm cursor-pointer">
               <span>Apakah nomor telepon dan pesan saya aman (tidak disebar)?</span>
               <i id="faqIcon-3" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
             </button>
-            <div id="faqAnswer-3" class="hidden p-4.5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
-              Sangat aman! Seluruh enkripsi URL dan riwayat riwayat disimpan secara lokal di peramban (browser) masing-masing pengguna. Data nomor Anda tidak diperjualbelikan atau digunakan untuk spam pihak ketiga.
+            <div id="faqAnswer-3" class="hidden p-4 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
+              Sangat aman! Seluruh enkripsi URL dan riwayat disimpan secara lokal di peramban (browser) masing-masing pengguna. Data nomor Anda tidak diperjualbelikan atau digunakan untuk spam pihak ketiga.
             </div>
           </div>
-
-          <!-- FAQ 4 -->
-          <div class="border border-slate-200 rounded-2xl overflow-hidden transition-all">
-            <button type="button" onclick="toggleLandingFaq(4)" class="w-full p-4.5 bg-slate-50 hover:bg-slate-100/80 text-left flex items-center justify-between font-bold text-slate-900 text-xs sm:text-sm">
-              <span>Bagaimana jika nomor saya berasal dari luar Indonesia?</span>
-              <i id="faqIcon-4" class="fa-solid fa-chevron-down text-xs text-slate-400 transition-transform"></i>
-            </button>
-            <div id="faqAnswer-4" class="hidden p-4.5 bg-white text-xs text-slate-600 leading-relaxed border-t border-slate-100">
-              WALIG Pro mendukung berbagai pilihan kode negara, termasuk Malaysia (+60), Singapura (+65), Australia (+61), Arab Saudi (+966), Amerika Serikat (+1), Inggris (+44), dan negara lainnya. Cukup pilih kode negara dari dropdown di Halaman Studio.
-            </div>
-          </div>
-
         </div>
       </div>
 
@@ -483,7 +320,7 @@
         <button 
           type="button" 
           onclick="switchPage(1)" 
-          class="py-4 px-8 rounded-2xl bg-white text-brand-700 hover:bg-brand-50 font-black text-sm shadow-xl active:scale-95 transition shrink-0 flex items-center gap-2"
+          class="py-4 px-8 rounded-2xl bg-white text-brand-700 hover:bg-brand-50 font-black text-sm shadow-xl active:scale-95 transition shrink-0 flex items-center gap-2 cursor-pointer"
         >
           <span>Masuk & Buat Link Sekarang</span>
           <i class="fa-solid fa-arrow-right"></i>
@@ -495,11 +332,11 @@
     <!-- ============================================================ -->
     <!-- HALAMAN 1: LOGIN & VERIFIKASI AKSES (CLEAN & MINIMALIST)    -->
     <!-- ============================================================ -->
-    <section id="page1" class="step-card max-w-md mx-auto block animate-in fade-in duration-300">
+    <section id="page1" class="step-card max-w-md mx-auto block">
       
       <!-- Minimalist Header Icon & Title -->
       <div class="text-center mb-6">
-        <div class="w-12 h-12 rounded-2xl bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 border border-brand-200/70 dark:border-brand-800/70 flex items-center justify-center text-xl mx-auto mb-3 shadow-2xs">
+        <div class="w-12 h-12 rounded-2xl bg-brand-50 dark:bg-brand-950/60 text-brand-600 dark:text-brand-400 border border-brand-200/70 dark:border-brand-800/70 flex items-center justify-center text-xl mx-auto mb-3 shadow-sm">
           <i class="fa-brands fa-whatsapp"></i>
         </div>
         <h1 class="text-2xl font-black text-slate-900 dark:text-white tracking-tight">
@@ -528,12 +365,12 @@
                 id="userNameInput" 
                 required 
                 placeholder="cth: Toko Berkah / Budi"
-                class="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 font-medium bg-slate-50/50 dark:bg-slate-800/40 transition-all focus:outline-hidden"
+                class="w-full pl-9 pr-4 py-3 rounded-xl border border-slate-200 dark:border-slate-700 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/10 text-xs sm:text-sm text-slate-900 dark:text-white placeholder:text-slate-400 font-medium bg-slate-50/50 dark:bg-slate-800/40 transition-all focus:outline-none"
               >
             </div>
           </div>
 
-          <!-- Syarat Mutlak Follow & Share (Minimalist Box) -->
+          <!-- Syarat Mutlak Follow & Share -->
           <div id="followRequirementBox" class="p-3.5 rounded-2xl bg-slate-50 dark:bg-slate-800/50 border border-slate-200/80 dark:border-slate-700/80 transition-all space-y-2">
             <label class="flex items-start gap-2.5 cursor-pointer select-none group">
               <input 
@@ -550,11 +387,11 @@
 
             <!-- Compact Share Trigger -->
             <div class="pt-1 flex items-center justify-between border-t border-slate-200/60 dark:border-slate-700/60">
-              <span class="text-[10px] text-slate-400 font-mono">s.id/WALinkGenerator</span>
+              <span class="text-[10px] text-slate-400 font-mono">s.id/WALinkgenerator</span>
               <button 
                 type="button" 
                 onclick="shareCurrentTool()" 
-                class="text-[11px] font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 flex items-center gap-1 transition"
+                class="text-[11px] font-semibold text-brand-600 dark:text-brand-400 hover:text-brand-700 flex items-center gap-1 transition cursor-pointer"
                 title="Salin dan bagikan link"
               >
                 <i class="fa-solid fa-share-nodes text-[10px]"></i>
@@ -563,24 +400,24 @@
             </div>
           </div>
 
-          <!-- Primary Submit Button -->
+          <!-- Submit Button -->
           <div class="pt-1">
             <button 
               type="submit" 
               id="loginSubmitBtn"
-              class="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-brand-600/25 transition active:scale-98 cursor-pointer"
+              class="w-full py-3.5 px-4 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs sm:text-sm font-bold flex items-center justify-center gap-2 shadow-md shadow-brand-600/25 transition active:scale-95 cursor-pointer"
             >
               <span id="loginBtnText">Masuk & Mulai Buat Link</span>
               <i class="fa-solid fa-arrow-right text-xs"></i>
             </button>
           </div>
 
-          <!-- Subtle Link ke Panduan -->
+          <!-- Tautan ke Panduan Lengkap -->
           <div class="text-center pt-2">
             <button 
               type="button" 
               onclick="switchPage('landing')" 
-              class="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-medium inline-flex items-center gap-1.5 transition"
+              class="text-xs text-slate-400 hover:text-slate-700 dark:hover:text-slate-200 font-medium inline-flex items-center gap-1.5 transition cursor-pointer"
             >
               <i class="fa-regular fa-circle-question text-[11px]"></i>
               <span>Pelajari cara pakai di Panduan Lengkap</span>
@@ -610,17 +447,17 @@
         </div>
 
         <div class="flex items-center gap-2">
-          <button type="button" onclick="switchPage(1)" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-xs font-semibold transition">
+          <button type="button" onclick="switchPage(1)" class="px-3.5 py-2 rounded-xl border border-slate-200 bg-white hover:bg-slate-50 text-slate-600 text-xs font-semibold transition cursor-pointer">
             <i class="fa-solid fa-arrow-left mr-1"></i> Kembali ke Login
           </button>
-          <button type="button" onclick="resetGeneratorForm()" class="px-3.5 py-2 rounded-xl text-slate-500 hover:text-red-600 hover:bg-red-50 text-xs font-semibold transition">
+          <button type="button" onclick="resetGeneratorForm()" class="px-3.5 py-2 rounded-xl text-slate-500 hover:text-red-600 hover:bg-red-50 text-xs font-semibold transition cursor-pointer">
             <i class="fa-solid fa-rotate-left mr-1"></i> Kosongkan
           </button>
         </div>
       </div>
 
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-        <!-- Left 7 cols: Form Panel -->
+        <!-- Form Panel -->
         <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 space-y-6">
           
           <!-- Input Nomor WhatsApp -->
@@ -628,9 +465,9 @@
             <label for="phoneNumber" class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
               Nomor WhatsApp Tujuan <span class="text-red-500">*</span>
             </label>
-            <div class="flex rounded-2xl shadow-2xs border border-slate-200 focus-within:border-brand-500 focus-within:ring-4 focus-within:ring-brand-500/15 transition-all overflow-hidden bg-slate-50/50">
+            <div class="flex rounded-2xl shadow-sm border border-slate-200 focus-within:border-brand-500 focus-within:ring-4 focus-within:ring-brand-500/15 transition-all overflow-hidden bg-slate-50/50">
               <div class="relative flex items-center border-r border-slate-200 bg-slate-100/70 px-3 py-2.5">
-                <select id="countryCode" class="bg-transparent text-xs sm:text-sm font-bold text-slate-800 outline-hidden pr-6 cursor-pointer appearance-none">
+                <select id="countryCode" class="bg-transparent text-xs sm:text-sm font-bold text-slate-800 outline-none pr-6 cursor-pointer appearance-none">
                   <option value="62" selected>🇮🇩 +62 (ID)</option>
                   <option value="60">🇲🇾 +60 (MY)</option>
                   <option value="65">🇸🇬 +65 (SG)</option>
@@ -646,9 +483,9 @@
                   type="tel" 
                   id="phoneNumber" 
                   placeholder="Contoh: 08123456789 atau 8123456789"
-                  class="w-full px-4 py-3.5 bg-transparent text-sm text-slate-900 placeholder:text-slate-400 font-semibold focus:outline-hidden"
+                  class="w-full px-4 py-3.5 bg-transparent text-sm text-slate-900 placeholder:text-slate-400 font-semibold focus:outline-none"
                 >
-                <button id="clearPhoneBtn" type="button" class="hidden text-slate-300 hover:text-slate-500 mr-3 text-sm" title="Bersihkan">
+                <button id="clearPhoneBtn" type="button" class="hidden text-slate-300 hover:text-slate-500 mr-3 text-sm cursor-pointer" title="Bersihkan">
                   <i class="fa-solid fa-circle-xmark"></i>
                 </button>
               </div>
@@ -671,22 +508,22 @@
             <!-- Format Toolbar -->
             <div class="flex items-center flex-wrap gap-1 mb-2 px-2.5 py-1.5 bg-slate-100/80 border border-slate-200/80 rounded-xl text-xs text-slate-600">
               <span class="text-[10px] font-bold text-slate-400 uppercase tracking-wider mr-1">Format:</span>
-              <button type="button" onclick="insertFormatting('*')" class="px-2 py-1 hover:bg-white rounded-md font-bold transition">Tebal (*)</button>
-              <button type="button" onclick="insertFormatting('_')" class="px-2 py-1 hover:bg-white rounded-md italic transition">Miring (_)</button>
-              <button type="button" onclick="insertFormatting('~')" class="px-2 py-1 hover:bg-white rounded-md line-through transition">Coret (~)</button>
+              <button type="button" onclick="insertFormatting('*')" class="px-2 py-1 hover:bg-white rounded-md font-bold transition cursor-pointer">Tebal (*)</button>
+              <button type="button" onclick="insertFormatting('_')" class="px-2 py-1 hover:bg-white rounded-md italic transition cursor-pointer">Miring (_)</button>
+              <button type="button" onclick="insertFormatting('~')" class="px-2 py-1 hover:bg-white rounded-md line-through transition cursor-pointer">Coret (~)</button>
               <div class="h-3 w-[1px] bg-slate-300 mx-1"></div>
-              <button type="button" onclick="insertEmoji('👋')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Halo">👋</button>
-              <button type="button" onclick="insertEmoji('🛒')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Keranjang">🛒</button>
-              <button type="button" onclick="insertEmoji('📦')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Paket">📦</button>
-              <button type="button" onclick="insertEmoji('✨')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Kilau">✨</button>
-              <button type="button" onclick="insertEmoji('🙏')" class="px-1.5 py-1 hover:bg-white rounded-md transition" title="Terima kasih">🙏</button>
+              <button type="button" onclick="insertEmoji('👋')" class="px-1.5 py-1 hover:bg-white rounded-md transition cursor-pointer" title="Halo">👋</button>
+              <button type="button" onclick="insertEmoji('🛒')" class="px-1.5 py-1 hover:bg-white rounded-md transition cursor-pointer" title="Keranjang">🛒</button>
+              <button type="button" onclick="insertEmoji('📦')" class="px-1.5 py-1 hover:bg-white rounded-md transition cursor-pointer" title="Paket">📦</button>
+              <button type="button" onclick="insertEmoji('✨')" class="px-1.5 py-1 hover:bg-white rounded-md transition cursor-pointer" title="Kilau">✨</button>
+              <button type="button" onclick="insertEmoji('🙏')" class="px-1.5 py-1 hover:bg-white rounded-md transition cursor-pointer" title="Terima kasih">🙏</button>
             </div>
 
             <textarea 
               id="customMessage" 
               rows="4" 
               placeholder="Ketik pesan otomatis... Contoh: Halo Admin, saya tertarik dengan promo produk Anda. Mau tanya cara pemesanannya ya!"
-              class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 text-sm text-slate-900 placeholder:text-slate-400 font-sans focus:outline-hidden transition bg-slate-50/50"
+              class="w-full px-4 py-3 rounded-2xl border border-slate-200 focus:border-brand-500 focus:ring-4 focus:ring-brand-500/15 text-sm text-slate-900 placeholder:text-slate-400 font-sans focus:outline-none transition bg-slate-50/50"
             ></textarea>
           </div>
 
@@ -694,7 +531,7 @@
           <div class="p-4 rounded-2xl bg-gradient-to-br from-emerald-50/70 via-brand-50/40 to-slate-50 dark:from-slate-800/80 dark:via-slate-800/50 dark:to-slate-900 border border-emerald-200/80 dark:border-slate-700 space-y-3">
             <div class="flex items-center justify-between">
               <div class="flex items-center gap-2">
-                <div class="w-6 h-6 rounded-lg bg-brand-600 text-white flex items-center justify-center text-xs shadow-xs">
+                <div class="w-6 h-6 rounded-lg bg-brand-600 text-white flex items-center justify-center text-xs shadow-sm">
                   <i class="fa-solid fa-wand-magic-sparkles"></i>
                 </div>
                 <span class="text-xs font-bold text-slate-900 dark:text-white">Bantu Buat Pesan dengan AI</span>
@@ -706,7 +543,7 @@
                 <button 
                   type="button" 
                   onclick="toggleApiKeyInput()" 
-                  class="text-[10px] text-slate-500 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400 p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-slate-700 transition" 
+                  class="text-[10px] text-slate-500 hover:text-brand-600 dark:text-slate-400 dark:hover:text-brand-400 p-1 rounded-md hover:bg-slate-200/60 dark:hover:bg-slate-700 transition cursor-pointer" 
                   title="Atur API Key AI Studio"
                 >
                   <i class="fa-solid fa-key"></i>
@@ -714,7 +551,7 @@
               </div>
             </div>
 
-            <!-- Panel Konfigurasi API Key Mandiri (LocalStorage) -->
+            <!-- Panel Konfigurasi API Key Mandiri -->
             <div id="apiKeyConfigBox" class="hidden p-3 rounded-xl bg-white dark:bg-slate-900 border border-emerald-200 dark:border-slate-700 space-y-2 text-xs">
               <div class="flex items-center justify-between">
                 <span class="font-bold text-[11px] text-slate-800 dark:text-slate-200 flex items-center gap-1">
@@ -729,7 +566,7 @@
                   type="password" 
                   id="customApiKeyInput" 
                   placeholder="Tempel kunci AIzaSy... disini (opsional)" 
-                  class="flex-1 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-800 dark:text-slate-100 focus:outline-hidden"
+                  class="flex-1 px-3 py-1.5 rounded-lg border border-slate-200 dark:border-slate-700 bg-slate-50 dark:bg-slate-800 text-xs text-slate-800 dark:text-slate-100 focus:outline-none"
                 >
                 <button 
                   type="button" 
@@ -750,14 +587,14 @@
                 type="text" 
                 id="aiPromptInput" 
                 placeholder="Tulis ide kasar (cth: promo diskon 30% all item akhir pekan, tanya stok warna baju)"
-                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-hidden focus:border-brand-500"
+                class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-xs bg-white dark:bg-slate-900 text-slate-800 dark:text-slate-100 placeholder:text-slate-400 focus:outline-none focus:border-brand-500"
                 onkeydown="if(event.key==='Enter'){event.preventDefault();generateAiTemplate();}"
               >
               
               <div class="flex items-center justify-between gap-2 flex-wrap">
                 <div class="flex items-center gap-1.5">
                   <span class="text-[11px] text-slate-500 dark:text-slate-400 font-medium">Gaya:</span>
-                  <select id="aiToneSelect" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-[11px] px-2 py-1 text-slate-700 dark:text-slate-300 font-medium focus:outline-hidden cursor-pointer">
+                  <select id="aiToneSelect" class="bg-white dark:bg-slate-900 border border-slate-200 dark:border-slate-700 rounded-lg text-[11px] px-2 py-1 text-slate-700 dark:text-slate-300 font-medium focus:outline-none cursor-pointer">
                     <option value="Santai & Ramah">Santai & Ramah</option>
                     <option value="Sopan & Formal Bisnis">Sopan & Formal Bisnis</option>
                     <option value="Promosi Menarik & Urgent">Promosi Menarik & Urgent</option>
@@ -769,7 +606,7 @@
                   type="button" 
                   id="btnAiGenerate"
                   onclick="generateAiTemplate()" 
-                  class="px-3.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white text-xs font-bold flex items-center gap-1.5 transition shadow-xs cursor-pointer"
+                  class="px-3.5 py-1.5 rounded-xl bg-brand-600 hover:bg-brand-700 active:scale-95 text-white text-xs font-bold flex items-center gap-1.5 transition shadow-sm cursor-pointer"
                 >
                   <i id="aiBtnIcon" class="fa-solid fa-sparkles text-[11px]"></i>
                   <span id="aiBtnText">Ramu Pesan AI</span>
@@ -777,14 +614,12 @@
               </div>
             </div>
 
-            <!-- AI Output Suggestion List Container -->
+            <!-- AI Output Suggestion List -->
             <div id="aiSuggestionsContainer" class="hidden pt-2 space-y-2 border-t border-emerald-200/50 dark:border-slate-700">
               <span class="text-[10px] font-bold uppercase tracking-wider text-slate-400 dark:text-slate-500">
                 Pilih Opsi Pesan yang Sesuai:
               </span>
-              <div id="aiResultsList" class="space-y-2">
-                <!-- Dynamically populated via JS -->
-              </div>
+              <div id="aiResultsList" class="space-y-2"></div>
             </div>
           </div>
 
@@ -792,27 +627,27 @@
           <div>
             <span class="block text-xs font-bold text-slate-600 dark:text-slate-300 mb-2">Template Pesan Siap Pakai:</span>
             <div class="flex flex-wrap gap-2">
-              <button type="button" onclick="useTemplate('order')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition">
+              <button type="button" onclick="useTemplate('order')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition cursor-pointer">
                 🛍️ Format Order Toko
               </button>
-              <button type="button" onclick="useTemplate('cs')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition">
+              <button type="button" onclick="useTemplate('cs')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition cursor-pointer">
                 💬 Customer Care
               </button>
-              <button type="button" onclick="useTemplate('booking')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition">
+              <button type="button" onclick="useTemplate('booking')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition cursor-pointer">
                 📅 Booking Jadwal
               </button>
-              <button type="button" onclick="useTemplate('inquiry')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition">
+              <button type="button" onclick="useTemplate('inquiry')" class="text-xs px-3 py-1.5 rounded-xl bg-slate-100 hover:bg-brand-50 hover:text-brand-700 hover:border-brand-200 border border-slate-200 text-slate-700 font-medium transition cursor-pointer">
                 💼 Konsultasi Layanan
               </button>
             </div>
           </div>
 
-          <!-- Generate & Proceed to Step 3 Button -->
+          <!-- Proceed to Step 3 Button -->
           <div class="pt-4 border-t border-slate-100">
             <button 
               type="button" 
               onclick="processAndProceedToStep3()" 
-              class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 text-white font-bold text-sm shadow-xl shadow-brand-600/25 transition active:scale-98 flex items-center justify-center gap-2"
+              class="w-full py-4 px-6 rounded-2xl bg-gradient-to-r from-brand-600 to-emerald-600 hover:from-brand-700 hover:to-emerald-700 text-white font-bold text-sm shadow-xl shadow-brand-600/25 transition active:scale-95 flex items-center justify-center gap-2 cursor-pointer"
             >
               <span>Simpan & Lihat Hasil Lengkap (CTA)</span>
               <i class="fa-solid fa-arrow-right"></i>
@@ -821,7 +656,7 @@
 
         </div>
 
-        <!-- Right 5 cols: Live Smartphone Mockup -->
+        <!-- Live Smartphone Mockup -->
         <div class="lg:col-span-5 flex flex-col items-center">
           <div class="w-full max-w-xs sm:max-w-sm bg-slate-900 rounded-[2.8rem] p-3 shadow-2xl border-4 border-slate-800 relative">
             <!-- Notch -->
@@ -852,11 +687,11 @@
 
               <!-- Chat Stream -->
               <div class="flex-1 p-4 overflow-y-auto flex flex-col justify-end space-y-3 z-10">
-                <div class="self-center bg-amber-50/95 border border-amber-200/80 text-amber-950 text-[10px] px-3 py-1 rounded-lg text-center shadow-2xs max-w-[90%]">
+                <div class="self-center bg-amber-50/95 border border-amber-200/80 text-amber-950 text-[10px] px-3 py-1 rounded-lg text-center shadow-sm max-w-[90%]">
                   <i class="fa-solid fa-lock text-[9px] mr-1"></i> Pesan terenkripsi aman.
                 </div>
 
-                <div class="self-end max-w-[88%] bg-brand-walight text-slate-900 rounded-2xl rounded-tr-xs p-3 shadow-2xs border border-emerald-300/40 transition-all">
+                <div class="self-end max-w-[88%] bg-brand-walight text-slate-900 rounded-2xl rounded-tr-sm p-3 shadow-sm border border-emerald-300/40 transition-all">
                   <p id="previewMessageBubble" class="text-xs whitespace-pre-wrap leading-relaxed break-words font-normal">
                     Pesan Anda akan tampil di sini secara live saat mengetik...
                   </p>
@@ -867,13 +702,13 @@
                 </div>
               </div>
 
-              <!-- Input bar bottom dummy -->
+              <!-- Input bar dummy -->
               <div class="bg-slate-100 p-2.5 border-t border-slate-200 flex items-center gap-2 z-20">
                 <div class="flex-1 bg-white rounded-full px-3 py-1.5 flex items-center gap-2 border border-slate-200 text-slate-400 text-xs">
                   <i class="fa-regular fa-face-smile"></i>
                   <span class="text-[11px] truncate">Ketik pesan...</span>
                 </div>
-                <div class="w-8 h-8 rounded-full bg-brand-wateal text-white flex items-center justify-center text-xs shadow-xs">
+                <div class="w-8 h-8 rounded-full bg-brand-wateal text-white flex items-center justify-center text-xs shadow-sm">
                   <i class="fa-solid fa-microphone"></i>
                 </div>
               </div>
@@ -895,7 +730,7 @@
       <!-- Top Success Alert Banner -->
       <div class="bg-gradient-to-r from-brand-600 to-emerald-600 rounded-3xl p-6 sm:p-8 text-white shadow-xl shadow-brand-600/20 relative overflow-hidden flex flex-col md:flex-row md:items-center justify-between gap-6">
         <div class="relative z-10">
-          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold mb-3 backdrop-blur-xs">
+          <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-white/20 text-white text-xs font-bold mb-3 backdrop-blur-sm">
             <i class="fa-solid fa-circle-check"></i>
             Tautan Siap Digunakan!
           </div>
@@ -908,20 +743,19 @@
         </div>
 
         <div class="flex items-center gap-3 relative z-10 shrink-0">
-          <button type="button" onclick="switchPage(2)" class="py-3 px-5 rounded-2xl bg-white text-brand-700 hover:bg-brand-50 text-xs sm:text-sm font-bold shadow-md transition active:scale-95 flex items-center gap-2">
+          <button type="button" onclick="switchPage(2)" class="py-3 px-5 rounded-2xl bg-white text-brand-700 hover:bg-brand-50 text-xs sm:text-sm font-bold shadow-md transition active:scale-95 flex items-center gap-2 cursor-pointer">
             <i class="fa-solid fa-plus"></i>
             <span>Buat Link Baru</span>
           </button>
         </div>
 
-        <!-- Decorative background circles -->
         <div class="absolute -right-10 -bottom-10 w-60 h-60 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
       </div>
 
       <!-- Main Result & QR Code Section -->
       <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
         
-        <!-- Left: Link Details & Actions (7 cols) -->
+        <!-- Left: Link Details & Actions -->
         <div class="lg:col-span-7 bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 space-y-6">
           <div>
             <label class="block text-xs font-bold uppercase tracking-wider text-slate-700 mb-2">
@@ -932,7 +766,7 @@
                 type="text" 
                 id="ctaResultLinkInput" 
                 readonly 
-                class="w-full pl-10 pr-24 py-3.5 bg-slate-100/90 text-slate-800 rounded-2xl text-xs sm:text-sm font-mono border border-slate-200 focus:outline-hidden select-all font-medium"
+                class="w-full pl-10 pr-24 py-3.5 bg-slate-100/90 text-slate-800 rounded-2xl text-xs sm:text-sm font-mono border border-slate-200 focus:outline-none select-all font-medium"
               >
               <div class="absolute left-3.5 text-slate-400">
                 <i class="fa-solid fa-link text-sm"></i>
@@ -940,7 +774,7 @@
               <button 
                 type="button" 
                 onclick="copyCtaLink()" 
-                class="absolute right-2 px-3.5 py-2 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-xs transition flex items-center gap-1.5"
+                class="absolute right-2 px-3.5 py-2 bg-brand-600 hover:bg-brand-700 active:scale-95 text-white rounded-xl text-xs font-bold shadow-sm transition flex items-center gap-1.5 cursor-pointer"
               >
                 <i class="fa-regular fa-copy"></i>
                 <span id="copyBtnLabel">Salin</span>
@@ -968,7 +802,7 @@
               id="ctaOpenWaBtn" 
               href="#" 
               target="_blank" 
-              class="flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-brand-wa hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-500/20 active:scale-95 transition text-center"
+              class="flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-brand-wa hover:bg-emerald-600 text-white font-bold text-xs sm:text-sm shadow-md shadow-emerald-500/20 active:scale-95 transition text-center cursor-pointer"
             >
               <i class="fa-brands fa-whatsapp text-lg"></i>
               <span>Buka di WhatsApp Langsung</span>
@@ -977,7 +811,7 @@
             <button 
               type="button" 
               onclick="downloadGeneratedQr()" 
-              class="flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-slate-900/15 active:scale-95 transition"
+              class="flex items-center justify-center gap-2 py-3.5 px-4 rounded-2xl bg-slate-900 hover:bg-slate-800 text-white font-bold text-xs sm:text-sm shadow-md shadow-slate-900/15 active:scale-95 transition cursor-pointer"
             >
               <i class="fa-solid fa-download"></i>
               <span>Unduh Gambar QR Code</span>
@@ -985,13 +819,13 @@
           </div>
         </div>
 
-        <!-- Right: Generated QR Box Preview (5 cols) -->
+        <!-- Right: Generated QR Box Preview -->
         <div class="lg:col-span-5 bg-white rounded-3xl p-6 sm:p-8 shadow-xl shadow-slate-200/50 border border-slate-100 flex flex-col items-center text-center">
           <span class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-1">QR Code Siap Cetak</span>
           <h3 class="text-lg font-bold text-slate-900 mb-4">Pindai Langsung</h3>
           
           <div class="p-4 bg-slate-50 rounded-2xl border border-slate-200 shadow-inner mb-4">
-            <div id="ctaQrcodeCanvas" class="bg-white p-2.5 rounded-xl shadow-xs"></div>
+            <div id="ctaQrcodeCanvas" class="bg-white p-2.5 rounded-xl shadow-sm min-w-[170px] min-h-[170px] flex items-center justify-center"></div>
           </div>
 
           <p class="text-[11px] text-slate-500 leading-relaxed max-w-xs">
@@ -1001,29 +835,29 @@
 
       </div>
 
-      <!-- Minimalist & Non-intrusive Creator Support Section -->
-      <div class="p-4 sm:p-5 rounded-2xl bg-slate-50 dark:bg-slate-900/60 border border-slate-200/80 dark:border-slate-800 flex flex-col sm:flex-row items-center justify-between gap-4">
-        <div class="flex items-center gap-3 text-center sm:text-left">
-          <div class="w-9 h-9 rounded-xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-base shrink-0 border border-amber-200/50 dark:border-amber-900/50">
+      <!-- Minimalist Creator Support Section -->
+      <div class="p-5 rounded-3xl bg-white dark:bg-slate-900 border border-slate-200/80 dark:border-slate-800 shadow-md flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div class="flex items-center gap-3.5 text-center sm:text-left">
+          <div class="w-11 h-11 rounded-2xl bg-amber-50 dark:bg-amber-950/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-xl shrink-0 border border-amber-200/60 dark:border-amber-900/50 shadow-sm">
             <i class="fa-solid fa-mug-saucer"></i>
           </div>
           <div>
-            <p class="text-xs font-semibold text-slate-800 dark:text-slate-200">
+            <p class="text-sm font-bold text-slate-900 dark:text-slate-100">
               WALIG Pro bermanfaat untuk Anda?
             </p>
-            <p class="text-[11px] text-slate-500 dark:text-slate-400">
-              Dukungan secangkir kopi sukarela sangat berarti untuk pemeliharaan server & layanan gratis ini.
+            <p class="text-xs text-slate-500 dark:text-slate-400 mt-0.5">
+              Dukungan traktiran kopi sukarela via SociaBuzz, BagiBagi, Trakteer, atau QRIS sangat berarti untuk pemeliharaan tools ini.
             </p>
           </div>
         </div>
 
         <button 
           type="button" 
-          onclick="openPaymentModal('Secangkir Kopi')" 
-          class="shrink-0 px-4 py-2 rounded-xl bg-white dark:bg-slate-800 hover:bg-amber-50 dark:hover:bg-amber-950/30 hover:border-amber-300 border border-slate-200 dark:border-slate-700 text-xs font-semibold text-slate-700 dark:text-slate-300 transition active:scale-95 shadow-2xs flex items-center gap-1.5"
+          onclick="openPaymentModal()" 
+          class="shrink-0 px-5 py-2.5 rounded-xl bg-gradient-to-r from-amber-500 to-amber-600 hover:from-amber-600 hover:to-amber-700 text-white text-xs font-bold shadow-md shadow-amber-500/20 active:scale-95 transition flex items-center gap-2 cursor-pointer"
         >
-          <i class="fa-solid fa-heart text-red-500 text-xs"></i>
-          <span>Traktir Kopi</span>
+          <i class="fa-solid fa-heart text-white text-xs animate-pulse"></i>
+          <span>Traktir Kopi Kreator</span>
         </button>
       </div>
 
@@ -1042,56 +876,304 @@
           <button 
             type="button" 
             onclick="clearUserHistory()" 
-            class="text-xs text-red-500 hover:text-red-700 font-semibold px-3 py-1.5 rounded-xl hover:bg-red-50 border border-red-100 transition self-start sm:self-auto"
+            class="text-xs text-red-500 hover:text-red-700 font-semibold px-3 py-1.5 rounded-xl hover:bg-red-50 border border-red-100 transition self-start sm:self-auto cursor-pointer"
           >
             <i class="fa-regular fa-trash-can mr-1"></i> Bersihkan Riwayat Saya
           </button>
         </div>
 
         <!-- History cards grid -->
-        <div id="userHistoryList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-6">
-          <!-- Dynamically populated via JS -->
-        </div>
+        <div id="userHistoryList" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 pt-6"></div>
 
         <!-- Empty history state -->
-      <div id="emptyHistoryBox" class="text-center py-12">
-        <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-lg mx-auto mb-2">
-          <i class="fa-regular fa-folder-open"></i>
+        <div id="emptyHistoryBox" class="text-center py-12">
+          <div class="w-12 h-12 rounded-full bg-slate-100 text-slate-400 flex items-center justify-center text-lg mx-auto mb-2">
+            <i class="fa-regular fa-folder-open"></i>
+          </div>
+          <p class="text-xs text-slate-500 font-medium">Belum ada tautan yang disimpan untuk akun ini.</p>
         </div>
-        <p class="text-xs text-slate-500 font-medium">Belum ada tautan yang disimpan untuk akun ini.</p>
       </div>
-    </div>
 
-  </section>
+    </section>
 
   </main>
 
-  <!-- MODAL: Support / Donasi Kreator Pop-up (Clean & Polite) -->
-  <div id="paymentModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-xs z-50 hidden flex items-center justify-center p-4">
-    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-sm w-full p-6 shadow-2xl border border-slate-100 dark:border-slate-800 relative text-center">
-      <button type="button" onclick="closePaymentModal()" class="absolute top-4 right-4 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center transition">
+  <!-- ============================================================ -->
+  <!-- BUTTON TERBANG (FLOATING ACTION BUTTON): SARAN & MASUKAN     -->
+  <!-- ============================================================ -->
+  <aside aria-label="Saran dan Masukan">
+    <button 
+      type="button" 
+      id="floatingFeedbackBtn"
+      onclick="openFeedbackModal()" 
+      class="fixed bottom-5 left-5 z-40 flex items-center gap-2 py-2.5 px-4 rounded-full bg-white dark:bg-slate-800 text-slate-800 dark:text-slate-100 shadow-xl border border-slate-200/90 dark:border-slate-700 hover:border-brand-500 hover:text-brand-600 dark:hover:text-brand-400 hover:shadow-brand-500/20 active:scale-95 transition-all group cursor-pointer"
+      title="Beri Saran & Masukan untuk Developer"
+    >
+      <span class="relative flex h-2.5 w-2.5">
+        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-brand-400 opacity-75"></span>
+        <span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-brand-500"></span>
+      </span>
+      <i class="fa-solid fa-comment-dots text-brand-600 text-sm group-hover:scale-110 transition-transform"></i>
+      <span class="text-xs font-bold tracking-tight">Kirim Masukan</span>
+    </button>
+  </aside>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: SARAN & MASUKAN PENGGUNA (FEEDBACK MODAL)             -->
+  <!-- ============================================================ -->
+  <div id="feedbackModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-lg w-full p-6 sm:p-7 shadow-2xl border border-slate-100 dark:border-slate-800 relative text-left space-y-4">
+      
+      <!-- Close Button -->
+      <button type="button" onclick="closeFeedbackModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-500 dark:text-slate-400 flex items-center justify-center transition cursor-pointer">
         <i class="fa-solid fa-xmark text-sm"></i>
       </button>
 
-      <div class="w-12 h-12 rounded-2xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 mx-auto flex items-center justify-center text-xl mb-3 shadow-2xs">
-        <i class="fa-solid fa-mug-hot"></i>
-      </div>
-
-      <h3 class="text-sm font-bold text-slate-900 dark:text-white" id="paymentModalTitle">Traktir Secangkir Kopi</h3>
-      <p class="text-xs text-slate-500 dark:text-slate-400 mt-1" id="paymentModalSub">Terima kasih atas kebaikan dan apresiasi Anda!</p>
-
-      <!-- Simulated QRIS / Code Box -->
-      <div class="my-4 p-4 bg-slate-50 dark:bg-slate-800 rounded-2xl border border-slate-200 dark:border-slate-700">
-        <div class="w-32 h-32 mx-auto bg-white p-2 rounded-xl shadow-xs border border-slate-200 flex items-center justify-center">
-          <i class="fa-solid fa-qrcode text-5xl text-slate-800"></i>
+      <!-- Modal Header -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-brand-50 dark:bg-brand-950 text-brand-600 dark:text-brand-400 border border-brand-200 dark:border-brand-800 flex items-center justify-center text-lg shrink-0">
+          <i class="fa-solid fa-comment-dots"></i>
         </div>
-        <p class="text-xs font-mono text-slate-700 dark:text-slate-300 mt-2 font-bold">QRIS / E-Wallet</p>
-        <p class="text-[10px] text-slate-400">Gopay, OVO, Dana, ShopeePay, Bank</p>
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Kotak Saran & Masukan</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Bantu kami meningkatkan kualitas tools WALIG Pro.</p>
+        </div>
       </div>
 
-      <button type="button" onclick="confirmPaymentSuccess()" class="w-full py-2.5 bg-brand-600 hover:bg-brand-700 text-white rounded-xl text-xs font-bold shadow-md shadow-brand-600/20 transition cursor-pointer">
-        Konfirmasi Terima Kasih ✨
+      <form id="feedbackForm" onsubmit="handleFeedbackSubmit(event)" class="space-y-3.5 pt-1">
+        
+        <!-- Input Nama Pengirim -->
+        <div>
+          <label for="feedbackUserName" class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+            Nama Anda <span class="text-red-500">*</span>
+          </label>
+          <input 
+            type="text" 
+            id="feedbackUserName" 
+            required 
+            placeholder="Nama atau brand Anda..."
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800 text-xs text-slate-900 dark:text-white focus:outline-none focus:border-brand-500"
+          >
+        </div>
+
+        <!-- Kategori Masukan -->
+        <div>
+          <label for="feedbackCategory" class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+            Kategori Masukan
+          </label>
+          <select 
+            id="feedbackCategory" 
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800 text-xs text-slate-900 dark:text-white font-medium focus:outline-none focus:border-brand-500 cursor-pointer"
+          >
+            <option value="💡 Usulan Fitur Baru">💡 Usulan Fitur Baru</option>
+            <option value="🐛 Laporan Kendala / Bug">🐛 Laporan Kendala / Bug</option>
+            <option value="🎨 Desain & Kenyamanan Penggunaan">🎨 Desain & Kenyamanan Penggunaan</option>
+            <option value="❤️ Apresiasi & Ulasan Positif">❤️ Apresiasi & Ulasan Positif</option>
+            <option value="💬 Pertanyaan & Lainnya">💬 Pertanyaan & Lainnya</option>
+          </select>
+        </div>
+
+        <!-- Rating Kepuasan Bintang Interaktif -->
+        <div>
+          <label class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+            Kepuasan Menggunakan WALIG Pro:
+          </label>
+          <div class="flex items-center gap-1.5" id="feedbackStarsContainer">
+            <button type="button" onclick="setFeedbackRating(1)" class="text-lg text-amber-400 hover:scale-125 transition cursor-pointer" title="1 Bintang"><i class="fa-solid fa-star"></i></button>
+            <button type="button" onclick="setFeedbackRating(2)" class="text-lg text-amber-400 hover:scale-125 transition cursor-pointer" title="2 Bintang"><i class="fa-solid fa-star"></i></button>
+            <button type="button" onclick="setFeedbackRating(3)" class="text-lg text-amber-400 hover:scale-125 transition cursor-pointer" title="3 Bintang"><i class="fa-solid fa-star"></i></button>
+            <button type="button" onclick="setFeedbackRating(4)" class="text-lg text-amber-400 hover:scale-125 transition cursor-pointer" title="4 Bintang"><i class="fa-solid fa-star"></i></button>
+            <button type="button" onclick="setFeedbackRating(5)" class="text-lg text-amber-400 hover:scale-125 transition cursor-pointer" title="5 Bintang"><i class="fa-solid fa-star"></i></button>
+            <span id="feedbackRatingLabel" class="text-xs font-bold text-slate-500 dark:text-slate-400 ml-2">5 / 5 (Sangat Puas)</span>
+          </div>
+        </div>
+
+        <!-- Textarea Isi Saran -->
+        <div>
+          <label for="feedbackMessage" class="block text-xs font-bold text-slate-700 dark:text-slate-300 mb-1">
+            Saran atau Pesan Anda <span class="text-red-500">*</span>
+          </label>
+          <textarea 
+            id="feedbackMessage" 
+            rows="3" 
+            required 
+            placeholder="Tuliskan masukan, saran fitur, kritik membangun, atau apresiasi Anda di sini..."
+            class="w-full px-3.5 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 bg-slate-50/60 dark:bg-slate-800 text-xs text-slate-900 dark:text-white placeholder:text-slate-400 focus:outline-none focus:border-brand-500 leading-relaxed"
+          ></textarea>
+        </div>
+
+        <!-- Submit Buttons -->
+        <div class="pt-2 flex items-center justify-end gap-2 border-t border-slate-100 dark:border-slate-800">
+          <button 
+            type="button" 
+            onclick="closeFeedbackModal()" 
+            class="px-4 py-2.5 rounded-xl border border-slate-200 dark:border-slate-700 text-slate-600 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 text-xs font-semibold transition cursor-pointer"
+          >
+            Batal
+          </button>
+          <button 
+            type="submit" 
+            id="feedbackSubmitBtn"
+            class="px-5 py-2.5 rounded-xl bg-brand-600 hover:bg-brand-700 text-white text-xs font-bold shadow-md shadow-brand-600/20 active:scale-95 transition flex items-center gap-2 cursor-pointer"
+          >
+            <i class="fa-solid fa-paper-plane text-xs"></i>
+            <span id="feedbackBtnText">Kirim Masukan</span>
+          </button>
+        </div>
+
+      </form>
+    </div>
+  </div>
+
+  <!-- ============================================================ -->
+  <!-- MODAL: SUPPORT / TRAKTIR KOPI (MULTI-PLATFORM + QRIS)       -->
+  <!-- ============================================================ -->
+  <div id="paymentModal" class="fixed inset-0 bg-slate-950/60 backdrop-blur-sm z-50 hidden items-center justify-center p-4">
+    <div class="bg-white dark:bg-slate-900 rounded-3xl max-w-md w-full p-6 sm:p-7 shadow-2xl border border-slate-100 dark:border-slate-800 relative text-left space-y-4">
+      
+      <!-- Close Button -->
+      <button type="button" onclick="closePaymentModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 flex items-center justify-center transition cursor-pointer">
+        <i class="fa-solid fa-xmark text-sm"></i>
       </button>
+
+      <!-- Header -->
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-2xl bg-amber-100 dark:bg-amber-900/40 text-amber-600 dark:text-amber-400 flex items-center justify-center text-lg shrink-0">
+          <i class="fa-solid fa-mug-hot"></i>
+        </div>
+        <div>
+          <h3 class="text-base font-extrabold text-slate-900 dark:text-white">Dukung & Traktir Kopi Kreator</h3>
+          <p class="text-xs text-slate-500 dark:text-slate-400">Pilih platform dukungan sukarela favorit Anda:</p>
+        </div>
+      </div>
+
+      <!-- Platform Selection Tabs -->
+      <div class="grid grid-cols-4 gap-1.5 p-1 rounded-xl bg-slate-100 dark:bg-slate-800 text-[11px] font-bold">
+        <button type="button" onclick="switchSupportTab('sociabuzz')" id="tabBtn-sociabuzz" class="py-1.5 px-2 rounded-lg bg-white dark:bg-slate-700 text-brand-700 dark:text-brand-300 shadow-sm transition text-center cursor-pointer">
+          SociaBuzz
+        </button>
+        <button type="button" onclick="switchSupportTab('bagibagi')" id="tabBtn-bagibagi" class="py-1.5 px-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition text-center cursor-pointer">
+          BagiBagi
+        </button>
+        <button type="button" onclick="switchSupportTab('trakteer')" id="tabBtn-trakteer" class="py-1.5 px-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition text-center cursor-pointer">
+          Trakteer
+        </button>
+        <button type="button" onclick="switchSupportTab('qris')" id="tabBtn-qris" class="py-1.5 px-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition text-center cursor-pointer">
+          QRIS
+        </button>
+      </div>
+
+      <!-- Tab Content: SociaBuzz -->
+      <div id="tabContent-sociabuzz" class="space-y-3">
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-indigo-50/70 to-purple-50/40 dark:from-slate-800/80 dark:to-slate-900 border border-indigo-100 dark:border-slate-700 text-center space-y-2">
+          <div class="w-10 h-10 rounded-full bg-indigo-600 text-white flex items-center justify-center text-lg mx-auto shadow-md shadow-indigo-600/20">
+            <i class="fa-solid fa-bolt"></i>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900 dark:text-white">Dukung via SociaBuzz</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs mx-auto">
+            Dukung kreator dengan metode pembayaran lengkap (Gopay, OVO, Dana, ShopeePay, Virtual Account & Kartu).
+          </p>
+          <div class="pt-2">
+            <a 
+              href="https://sociabuzz.com/ldsrw/support" 
+              target="_blank" 
+              onclick="celebrateSupport('SociaBuzz')"
+              class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-indigo-600 hover:bg-indigo-700 text-white font-bold text-xs shadow-md shadow-indigo-600/25 active:scale-95 transition cursor-pointer"
+            >
+              <span>Buka Halaman SociaBuzz</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: BagiBagi -->
+      <div id="tabContent-bagibagi" class="hidden space-y-3">
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-amber-50/70 to-orange-50/40 dark:from-slate-800/80 dark:to-slate-900 border border-amber-100 dark:border-slate-700 text-center space-y-2">
+          <div class="w-10 h-10 rounded-full bg-amber-500 text-white flex items-center justify-center text-lg mx-auto shadow-md shadow-amber-500/20">
+            <i class="fa-solid fa-gift"></i>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900 dark:text-white">Dukung via BagiBagi</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs mx-auto">
+            Traktir kopi dan cemilan praktis untuk kreator melalui platform BagiBagi.
+          </p>
+          <div class="pt-2">
+            <a 
+              href="https://bagibagi.co/ldsrw" 
+              target="_blank" 
+              onclick="celebrateSupport('BagiBagi')"
+              class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-amber-600 hover:bg-amber-700 text-white font-bold text-xs shadow-md shadow-amber-600/25 active:scale-95 transition cursor-pointer"
+            >
+              <span>Buka Halaman BagiBagi</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: Trakteer -->
+      <div id="tabContent-trakteer" class="hidden space-y-3">
+        <div class="p-4 rounded-2xl bg-gradient-to-br from-red-50/70 to-pink-50/40 dark:from-slate-800/80 dark:to-slate-900 border border-red-100 dark:border-slate-700 text-center space-y-2">
+          <div class="w-10 h-10 rounded-full bg-red-600 text-white flex items-center justify-center text-lg mx-auto shadow-md shadow-red-600/20">
+            <i class="fa-solid fa-heart"></i>
+          </div>
+          <h4 class="text-sm font-bold text-slate-900 dark:text-white">Dukung via Trakteer</h4>
+          <p class="text-xs text-slate-600 dark:text-slate-300 leading-relaxed max-w-xs mx-auto">
+            Traktir secangkir kopi favorit Anda kepada kreator melalui platform Trakteer ID.
+          </p>
+          <div class="pt-2">
+            <a 
+              href="https://trakteer.id/ldsrw/tip" 
+              target="_blank" 
+              onclick="celebrateSupport('Trakteer')"
+              class="inline-flex items-center justify-center gap-2 w-full py-2.5 px-4 rounded-xl bg-red-600 hover:bg-red-700 text-white font-bold text-xs shadow-md shadow-red-600/25 active:scale-95 transition cursor-pointer"
+            >
+              <span>Buka Halaman Trakteer</span>
+              <i class="fa-solid fa-arrow-up-right-from-square text-[11px]"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Tab Content: QRIS Statis (Terproteksi & Dikelola Backend) -->
+      <div id="tabContent-qris" class="hidden space-y-3">
+        <div class="p-4 rounded-2xl bg-slate-50 dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-center space-y-3">
+          
+          <div class="relative max-w-[200px] mx-auto bg-white p-2.5 rounded-2xl shadow-sm border border-slate-200 flex flex-col items-center justify-center min-h-[190px]">
+            <div id="qrisLoadingSpinner" class="absolute inset-0 flex items-center justify-center bg-white/90 rounded-2xl z-10 transition-opacity">
+              <i class="fa-solid fa-circle-notch fa-spin text-brand-600 text-2xl"></i>
+            </div>
+            <img 
+              id="qrisStaticImage" 
+              src="" 
+              alt="QRIS Statis Donasi"
+              class="w-full h-auto rounded-lg object-contain opacity-0 transition-opacity duration-300"
+              onload="handleQrisImageLoaded(this)"
+              onerror="handleQrisImageError(this)"
+            >
+          </div>
+
+          <div>
+            <span class="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-slate-800 dark:text-slate-200">
+              <i class="fa-solid fa-qrcode text-brand-600"></i> QRIS Universal Indonesia
+            </span>
+            <p class="text-[10px] text-slate-400 mt-0.5">BCA, Mandiri, BRI, BNI, Dana, Gopay, OVO, ShopeePay & Lainnya</p>
+          </div>
+
+          <div class="pt-2 border-t border-slate-200/70 dark:border-slate-700/70">
+            <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-100 dark:bg-emerald-950/60 text-emerald-800 dark:text-emerald-300 text-[10px] font-semibold">
+              <i class="fa-solid fa-shield-halved text-emerald-600"></i>
+              QRIS Resmi Terverifikasi Kreator
+            </span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="pt-1 text-center">
+        <p class="text-[11px] text-slate-400">Terima kasih atas kebaikan dan apresiasi Anda! ✨</p>
+      </div>
+
     </div>
   </div>
 
@@ -1103,12 +1185,15 @@
     <span id="toastMessage">Tautan WhatsApp berhasil disalin!</span>
   </div>
 
+  <!-- ============================================================ -->
+  <!-- FOOTER                                                       -->
+  <!-- ============================================================ -->
   <footer class="bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 py-6 text-xs text-slate-500 dark:text-slate-400">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between gap-4">
       <p>© 2026 Ldsr.studio.</p>
       <div class="flex items-center flex-wrap gap-4">
         <!-- Status integrasi otomatis GAS -->
-        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-semibold text-xs border border-emerald-200 dark:border-emerald-800 shadow-2xs" title="Terkoneksi langsung ke Google Spreadsheet via GAS">
+        <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-emerald-50 dark:bg-emerald-950/40 text-emerald-700 dark:text-emerald-400 font-semibold text-xs border border-emerald-200 dark:border-emerald-800 shadow-sm" title="Terkoneksi langsung ke Google Spreadsheet via GAS">
           <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span>
           <span>GAS Cloud Sync Aktif</span>
         </span>
@@ -1116,18 +1201,32 @@
     </div>
   </footer>
 
+  <!-- ============================================================ -->
+  <!-- LOGIKA JAVASCRIPT APLIKASI                                   -->
+  <!-- ============================================================ -->
   <script>
     // ==============================================================================
     // KONFIGURASI ENDPOINT GOOGLE APPS SCRIPT (GAS) TERKUNCI
-    // Endpoint ini terhubung otomatis ke Google Sheets dan hanya dapat diubah di kode ini:
     // ==============================================================================
     const GOOGLE_SHEETS_GAS_URL = "https://script.google.com/macros/s/AKfycbyoWWJN8GwVd0CUrFw13ovsk4yCxMZRHbuCmQAVy-4SAAaRmOjG5n838TyhuLdRXRkv/exec";
 
     // ==============================================================================
     // KONFIGURASI TAUTAN TOOLS UNTUK DIBAGIKAN (SHARE)
-    // Link ini dapat Anda edit langsung di bawah ini sesuai kebutuhan Anda:
     // ==============================================================================
-    const SHARE_TOOL_URL = "https://s.id/WALinkGenerator";
+    const SHARE_TOOL_URL = "https://s.id/WALinkgenerator";
+
+    // ==============================================================================
+    // KONFIGURASI LINK DUKUNGAN & DONASI KREATOR
+    // ==============================================================================
+    const SUPPORT_CONFIG = {
+      sociabuzz: "https://sociabuzz.com/ldsrw/support",
+      bagibagi: "https://bagibagi.co/ldsrw",
+      trakteer: "https://trakteer.id/ldsrw/tip",
+      fallbackQris: "https://api.qrserver.com/v1/create-qr-code/?size=250x250&data=https%3A%2F%2Fsociabuzz.com%2Fldsrw%2Fsupport"
+    };
+
+    let cachedBackendQrisUrl = '';
+    let isFetchingQris = false;
 
     const currentTheme = {
       mode: 'light'
@@ -1137,6 +1236,7 @@
       currentPage: 1,
       currentUser: '',
       isFollowedAndShared: false,
+      feedbackRating: 5,
       currentLink: {
         countryCode: '62',
         phoneRaw: '',
@@ -1147,7 +1247,7 @@
       history: []
     };
 
-    // Pre-made business message templates
+    // Template Pesan Bisnis Populer
     const MESSAGE_TEMPLATES = {
       order: "Halo Kak! Saya ingin melakukan pemesanan:\n- Nama Pemesan: \n- Pesanan Produk: \n- Jumlah: \n- Alamat Pengiriman: \nMohon info ketersediaan stok & total ongkir ya.",
       cs: "Halo Tim Customer Service WALIG,\nSaya memiliki pertanyaan seputar layanan dan penawaran promo yang sedang aktif. Mohon dibantu, terima kasih!",
@@ -1196,6 +1296,212 @@
     }
 
     // ==============================================================================
+    // PENGATURAN TABS & LOGIKA MODAL SUPPORT MULTI-PLATFORM
+    // ==============================================================================
+    function openPaymentModal() {
+      const modal = document.getElementById('paymentModal');
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+      loadBackendQrisImage();
+    }
+
+    function closePaymentModal() {
+      const modal = document.getElementById('paymentModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function switchSupportTab(tabName) {
+      const tabs = ['sociabuzz', 'bagibagi', 'trakteer', 'qris'];
+      tabs.forEach(t => {
+        const btn = document.getElementById(`tabBtn-${t}`);
+        const content = document.getElementById(`tabContent-${t}`);
+        if (t === tabName) {
+          btn.className = 'py-1.5 px-2 rounded-lg bg-white dark:bg-slate-700 text-brand-700 dark:text-brand-300 shadow-sm transition text-center cursor-pointer';
+          content.classList.remove('hidden');
+        } else {
+          btn.className = 'py-1.5 px-2 rounded-lg text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-white transition text-center cursor-pointer';
+          content.classList.add('hidden');
+        }
+      });
+
+      if (tabName === 'qris') {
+        loadBackendQrisImage();
+      }
+    }
+
+    function celebrateSupport(platformName) {
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 120,
+          spread: 80,
+          origin: { y: 0.6 }
+        });
+      }
+      showToast(`Membuka halaman donasi ${platformName}. Terima kasih banyak atas apresiasinya! ✨`);
+    }
+
+    // Konverter URL Google Drive ke direct viewable image
+    function formatDriveImageUrl(url) {
+      if (!url) return '';
+      const driveMatch = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/) || url.match(/id=([a-zA-Z0-9_-]+)/);
+      if (driveMatch && driveMatch[1]) {
+        return `https://drive.google.com/thumbnail?id=${driveMatch[1]}&sz=w1000`;
+      }
+      return url;
+    }
+
+    // Ambil QRIS URL terproteksi dari backend GAS
+    async function loadBackendQrisImage() {
+      const img = document.getElementById('qrisStaticImage');
+      const spinner = document.getElementById('qrisLoadingSpinner');
+
+      if (cachedBackendQrisUrl) {
+        img.src = cachedBackendQrisUrl;
+        return;
+      }
+
+      if (isFetchingQris) return;
+      isFetchingQris = true;
+
+      if (spinner) spinner.classList.remove('opacity-0', 'pointer-events-none');
+
+      try {
+        const fetchUrl = `${GOOGLE_SHEETS_GAS_URL}?action=get_qris`;
+        const res = await fetch(fetchUrl);
+        if (res.ok) {
+          const data = await res.json();
+          if (data && data.qris_url && data.qris_url.trim().length > 5) {
+            cachedBackendQrisUrl = formatDriveImageUrl(data.qris_url.trim());
+            img.src = cachedBackendQrisUrl;
+            return;
+          }
+        }
+      } catch (err) {
+        console.warn('Gagal memuat QRIS dinamis dari GAS:', err);
+      } finally {
+        isFetchingQris = false;
+      }
+
+      // Jika backend belum disetel atau offline, gunakan fallback bawaan
+      cachedBackendQrisUrl = SUPPORT_CONFIG.fallbackQris;
+      img.src = cachedBackendQrisUrl;
+    }
+
+    function handleQrisImageLoaded(img) {
+      const spinner = document.getElementById('qrisLoadingSpinner');
+      if (spinner) spinner.classList.add('opacity-0', 'pointer-events-none');
+      img.classList.remove('opacity-0');
+      img.classList.add('opacity-100');
+    }
+
+    function handleQrisImageError(img) {
+      const spinner = document.getElementById('qrisLoadingSpinner');
+      if (spinner) spinner.classList.add('opacity-0', 'pointer-events-none');
+      img.src = SUPPORT_CONFIG.fallbackQris;
+      img.classList.remove('opacity-0');
+      img.classList.add('opacity-100');
+    }
+
+    // ==============================================================================
+    // LOGIKA MODAL SARAN & MASUKAN (FEEDBACK SYSTEM)
+    // ==============================================================================
+    function openFeedbackModal() {
+      const modal = document.getElementById('feedbackModal');
+      const nameInput = document.getElementById('feedbackUserName');
+      if (appState.currentUser) {
+        nameInput.value = appState.currentUser;
+      }
+      modal.classList.remove('hidden');
+      modal.classList.add('flex');
+    }
+
+    function closeFeedbackModal() {
+      const modal = document.getElementById('feedbackModal');
+      modal.classList.add('hidden');
+      modal.classList.remove('flex');
+    }
+
+    function setFeedbackRating(stars) {
+      appState.feedbackRating = stars;
+      const container = document.getElementById('feedbackStarsContainer');
+      const buttons = container.querySelectorAll('button');
+      const label = document.getElementById('feedbackRatingLabel');
+
+      const labelsMap = {
+        1: '1 / 5 (Kurang)',
+        2: '2 / 5 (Cukup)',
+        3: '3 / 5 (Baik)',
+        4: '4 / 5 (Puas)',
+        5: '5 / 5 (Sangat Puas)'
+      };
+
+      buttons.forEach((btn, index) => {
+        if (index < stars) {
+          btn.innerHTML = '<i class="fa-solid fa-star text-amber-400"></i>';
+        } else {
+          btn.innerHTML = '<i class="fa-regular fa-star text-slate-300 dark:text-slate-600"></i>';
+        }
+      });
+
+      label.textContent = labelsMap[stars] || `${stars} / 5`;
+    }
+
+    async function handleFeedbackSubmit(event) {
+      event.preventDefault();
+      const name = document.getElementById('feedbackUserName').value.trim();
+      const category = document.getElementById('feedbackCategory').value;
+      const message = document.getElementById('feedbackMessage').value.trim();
+      const btn = document.getElementById('feedbackSubmitBtn');
+      const btnText = document.getElementById('feedbackBtnText');
+
+      if (!name || !message) {
+        showToast('Harap isi nama dan pesan masukan Anda.', 'warning');
+        return;
+      }
+
+      btn.disabled = true;
+      btn.classList.add('opacity-75', 'cursor-not-allowed');
+      btnText.textContent = 'Mengirim...';
+
+      const feedbackData = {
+        type: 'user_feedback',
+        name: name,
+        category: category,
+        rating: appState.feedbackRating,
+        message: message,
+        timestamp: new Date().toISOString()
+      };
+
+      // Simpan ke spreadsheet GAS
+      await sendDataToGAS(feedbackData);
+
+      // Cadangkan secara lokal (localStorage)
+      try {
+        const storedFeedbacks = JSON.parse(localStorage.getItem('walig_feedback_history') || '[]');
+        storedFeedbacks.unshift(feedbackData);
+        localStorage.setItem('walig_feedback_history', JSON.stringify(storedFeedbacks.slice(0, 50)));
+      } catch(e) {}
+
+      btn.disabled = false;
+      btn.classList.remove('opacity-75', 'cursor-not-allowed');
+      btnText.textContent = 'Kirim Masukan';
+
+      closeFeedbackModal();
+      document.getElementById('feedbackMessage').value = '';
+
+      if (typeof confetti === 'function') {
+        confetti({
+          particleCount: 100,
+          spread: 70,
+          origin: { y: 0.7 }
+        });
+      }
+
+      showToast('Terima kasih! Masukan Anda telah berhasil dikirim ke database kreator.');
+    }
+
+    // ==============================================================================
     // GEMINI AI & SMART COPYWRITER TEMPLATE GENERATOR
     // ==============================================================================
     function toggleApiKeyInput() {
@@ -1205,7 +1511,9 @@
       const isHidden = box.classList.contains('hidden');
       if (isHidden) {
         box.classList.remove('hidden');
-        input.value = localStorage.getItem('walig_gemini_api_key') || '';
+        try {
+          input.value = localStorage.getItem('walig_gemini_api_key') || '';
+        } catch(e) {}
         input.focus();
       } else {
         box.classList.add('hidden');
@@ -1215,22 +1523,28 @@
     function saveCustomApiKey() {
       const input = document.getElementById('customApiKeyInput');
       const val = input.value.trim();
-      if (val) {
-        localStorage.setItem('walig_gemini_api_key', val);
-        showToast('Kunci API berhasil disimpan di browser!');
-      } else {
-        localStorage.removeItem('walig_gemini_api_key');
-        showToast('Kunci API kustom dihapus.');
+      try {
+        if (val) {
+          localStorage.setItem('walig_gemini_api_key', val);
+          showToast('Kunci API berhasil disimpan di browser!');
+        } else {
+          localStorage.removeItem('walig_gemini_api_key');
+          showToast('Kunci API kustom dihapus.');
+        }
+      } catch(e) {
+        showToast('Penyimpanan lokal tidak tersedia.');
       }
       document.getElementById('apiKeyConfigBox').classList.add('hidden');
     }
 
     function getActiveApiKey() {
-      const customKey = localStorage.getItem('walig_gemini_api_key');
-      if (customKey && customKey.trim().length > 15) {
-        return customKey.trim();
-      }
-      // Safe decoded key to prevent automated GitHub secret scanning from revoking it on git push
+      try {
+        const customKey = localStorage.getItem('walig_gemini_api_key');
+        if (customKey && customKey.trim().length > 15) {
+          return customKey.trim();
+        }
+      } catch(e) {}
+      
       try {
         return atob('QUl6YVN5Q29xa2phcFlvQmhVMFRaXzdmakRqeDdHTFRwZHk0ekFr');
       } catch (e) {
@@ -1252,7 +1566,6 @@
         return;
       }
 
-      // Set Loading State
       btn.disabled = true;
       btn.classList.add('opacity-75', 'cursor-not-allowed');
       btnText.textContent = 'Memproses...';
@@ -1260,9 +1573,8 @@
 
       const apiKey = getActiveApiKey();
       const modelsToTry = [
-        'gemini-3-flash-preview',
-        'gemini-2.5-flash',
-        'gemini-2.0-flash'
+        'gemini-2.0-flash',
+        'gemini-1.5-flash'
       ];
 
       const systemPrompt = `Kamu adalah copywriter profesional untuk WhatsApp Marketing dan Customer Communication di Indonesia.
@@ -1272,7 +1584,7 @@ Format WhatsApp yang didukung:
 - Beri tanda _miring_ jika ada catatan halus
 - Gunakan emoji yang relevan dan natural
 - Buat kalimat sapaan pembuka dan Call-to-Action (CTA) penutup yang jelas
-Hasilkan array JSON berisi 3 objek dengan struktur schema yang diminta.`;
+Hasilkan array JSON berisi 3 objek dengan schema: [{"title": "...", "tone": "...", "message": "..."}]. Hanya keluarkan JSON murni tanpa markdown triple backticks.`;
 
       const userQuery = `Ide kasar pengguna: "${roughIdea}".
 Gaya / Nada bicara yang diinginkan: "${tone}".`;
@@ -1288,64 +1600,52 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
           parts: [{ text: systemPrompt }]
         },
         generationConfig: {
-          responseMimeType: "application/json",
-          responseSchema: {
-            type: "ARRAY",
-            items: {
-              type: "OBJECT",
-              properties: {
-                "title": { "type": "STRING", "description": "Judul variasi template yang ringkas" },
-                "tone": { "type": "STRING", "description": "Karakter gaya bahasa pesan ini" },
-                "message": { "type": "STRING", "description": "Teks pesan WhatsApp lengkap yang siap dikirimkan" }
-              },
-              "propertyOrdering": ["title", "tone", "message"]
-            }
-          }
+          responseMimeType: "application/json"
         }
       };
 
       let success = false;
       let lastErrorMessage = '';
 
-      // Coba panggil model Gemini secara berurutan
-      for (const modelName of modelsToTry) {
-        const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
-        try {
-          const response = await fetch(apiUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-          });
+      if (apiKey) {
+        for (const modelName of modelsToTry) {
+          const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/${modelName}:generateContent?key=${apiKey}`;
+          try {
+            const response = await fetch(apiUrl, {
+              method: 'POST',
+              headers: { 'Content-Type': 'application/json' },
+              body: JSON.stringify(payload)
+            });
 
-          if (!response.ok) {
-            let detailMsg = `HTTP ${response.status}`;
-            try {
-              const errBody = await response.json();
-              detailMsg = errBody?.error?.message || detailMsg;
-            } catch(e) {}
-            lastErrorMessage = detailMsg;
-            continue; // Coba model berikutnya jika error
-          }
-
-          const result = await response.json();
-          const jsonText = result.candidates?.[0]?.content?.parts?.[0]?.text;
-          if (jsonText) {
-            const templates = JSON.parse(jsonText);
-            if (Array.isArray(templates) && templates.length > 0) {
-              renderAiSuggestions(templates, tone, false);
-              success = true;
-              showToast('3 saran template pesan AI berhasil diramu!');
-              break;
+            if (!response.ok) {
+              let detailMsg = `HTTP ${response.status}`;
+              try {
+                const errBody = await response.json();
+                detailMsg = errBody?.error?.message || detailMsg;
+              } catch(e) {}
+              lastErrorMessage = detailMsg;
+              continue;
             }
+
+            const result = await response.json();
+            const rawText = result.candidates?.[0]?.content?.parts?.[0]?.text;
+            if (rawText) {
+              const cleanText = rawText.replace(/```json/g, '').replace(/```/g, '').trim();
+              const templates = JSON.parse(cleanText);
+              if (Array.isArray(templates) && templates.length > 0) {
+                renderAiSuggestions(templates, tone, false);
+                success = true;
+                showToast('3 saran template pesan AI berhasil diramu!');
+                break;
+              }
+            }
+          } catch (fetchErr) {
+            lastErrorMessage = fetchErr.message;
           }
-        } catch (fetchErr) {
-          lastErrorMessage = fetchErr.message;
         }
       }
 
-      // Jika API Cloud gagal (karena dicabut GitHub scanner atau kuota habis), aktifkan Smart Copywriter Engine
       if (!success) {
-        console.warn('Gemini API unreachable or key revoked:', lastErrorMessage);
         const fallbackTemplates = generateSmartFallbackTemplates(roughIdea, tone);
         renderAiSuggestions(fallbackTemplates, tone, true, lastErrorMessage);
       }
@@ -1356,7 +1656,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       btnIcon.className = 'fa-solid fa-sparkles text-[11px]';
     }
 
-    // Smart Copywriter Engine Cadangan (Menjamin aplikasi tidak pernah error di Vercel)
     function generateSmartFallbackTemplates(roughIdea, tone) {
       const words = roughIdea.split(/\s+/);
       const highlightedIdea = words.length > 7 ? words.slice(0, 5).join(' ') + '...' : roughIdea;
@@ -1407,7 +1706,7 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
           <div>
             <span class="font-bold">Mode Smart Copywriter Engine Aktif</span>
             <p class="text-[10px] text-amber-700 dark:text-amber-400 mt-0.5">
-              Kunci API publik sekarang tidak tersedia. Sistem beralih ke Mesin Cerdas lokal untuk tetap menghasilkan 3 opsi pesan berkualitas di bawah. Anda juga dapat memasukkan kunci baru lewat tombol <button type="button" onclick="toggleApiKeyInput()" class="underline font-bold">🔑 Kunci API</button>.
+              Sistem menyajikan 3 opsi pesan menggunakan mesin cerdas lokal. Anda juga dapat memasukkan kunci API mandiri melalui tombol <button type="button" onclick="toggleApiKeyInput()" class="underline font-bold cursor-pointer">🔑 Kunci API</button>.
             </p>
           </div>
         `;
@@ -1446,7 +1745,7 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
 
       container.classList.remove('hidden');
       if (isFallback) {
-        showToast('Template pesan cerdas berhasil dibuat!');
+        showToast('Template pesan cerdas siap digunakan!');
       }
     }
 
@@ -1455,10 +1754,10 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       document.getElementById('customMessage').value = decoded;
       updateStudioPreview();
       showToast('Pesan diterapkan ke formulir!');
-      window.scrollTo({
-        top: document.getElementById('customMessage').getBoundingClientRect().top + window.scrollY - 100,
-        behavior: 'smooth'
-      });
+      const targetEl = document.getElementById('customMessage');
+      if (targetEl) {
+        targetEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }
     }
 
     function escapeHtml(text) {
@@ -1471,7 +1770,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
         .replace(/'/g, '&#039;');
     }
 
-
     function toggleLandingFaq(index) {
       const ans = document.getElementById(`faqAnswer-${index}`);
       const icon = document.getElementById(`faqIcon-${index}`);
@@ -1480,15 +1778,14 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       const isHidden = ans.classList.contains('hidden');
       if (isHidden) {
         ans.classList.remove('hidden');
-        icon.classList.add('rotate-180');
+        if (icon) icon.classList.add('rotate-180');
       } else {
         ans.classList.add('hidden');
-        icon.classList.remove('rotate-180');
+        if (icon) icon.classList.remove('rotate-180');
       }
     }
 
     function switchPage(pageTarget) {
-      // Guard checking: cannot skip to step 2 or 3 without completing login & verification
       if ((pageTarget === 2 || pageTarget === 3) && (!appState.currentUser || !appState.isFollowedAndShared)) {
         showToast('Syarat mutlak: Anda wajib mengisi nama dan mencentang konfirmasi follow & share terlebih dahulu!', 'warning');
         pageTarget = 1;
@@ -1496,13 +1793,11 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
 
       appState.currentPage = pageTarget;
 
-      // Hide all pages
       document.getElementById('pageLanding').classList.add('hidden');
       document.getElementById('page1').classList.add('hidden');
       document.getElementById('page2').classList.add('hidden');
       document.getElementById('page3').classList.add('hidden');
 
-      // Show selected page
       if (pageTarget === 'landing') {
         document.getElementById('pageLanding').classList.remove('hidden');
       } else {
@@ -1514,9 +1809,9 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
 
       window.scrollTo({ top: 0, behavior: 'smooth' });
 
-      // Trigger specific page refresh
       if (pageTarget === 2) {
-        document.getElementById('studioGreetingUser').textContent = appState.currentUser;
+        const greetingEl = document.getElementById('studioGreetingUser');
+        if (greetingEl) greetingEl.textContent = appState.currentUser;
         updateStudioPreview();
       } else if (pageTarget === 3) {
         refreshCtaPage();
@@ -1536,8 +1831,21 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
     function shareCurrentTool() {
       const shareUrl = SHARE_TOOL_URL;
       const shareMessage = `Gunakan WALIG Pro - Generator Link WhatsApp Instan tanpa simpan nomor: ${shareUrl}`;
+
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(shareMessage).then(() => {
+          onShareSuccess();
+        }).catch(() => {
+          fallbackShareCopy(shareMessage);
+        });
+      } else {
+        fallbackShareCopy(shareMessage);
+      }
+    }
+
+    function fallbackShareCopy(text) {
       const temp = document.createElement('textarea');
-      temp.value = shareMessage;
+      temp.value = text;
       temp.style.position = 'fixed';
       temp.style.left = '-9999px';
       document.body.appendChild(temp);
@@ -1545,19 +1853,20 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       try {
         document.execCommand('copy');
         document.body.removeChild(temp);
-        
-        // Auto-check checkbox once user clicks share to smoothen the flow
-        const checkEl = document.getElementById('checkFollowShare');
-        if (checkEl && !checkEl.checked) {
-          checkEl.checked = true;
-          handleFollowCheckboxChange(checkEl);
-        }
-
-        showToast(`Tautan ${shareUrl} berhasil disalin! Silakan bagikan ke WhatsApp atau media sosial Anda.`);
+        onShareSuccess();
       } catch(e) {
         document.body.removeChild(temp);
         showToast('Gagal menyalin link.');
       }
+    }
+
+    function onShareSuccess() {
+      const checkEl = document.getElementById('checkFollowShare');
+      if (checkEl && !checkEl.checked) {
+        checkEl.checked = true;
+        handleFollowCheckboxChange(checkEl);
+      }
+      showToast(`Tautan ${SHARE_TOOL_URL} berhasil disalin! Silakan bagikan ke WhatsApp atau media sosial Anda.`);
     }
 
     async function handleLoginSubmit(event) {
@@ -1572,7 +1881,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
         return;
       }
 
-      // STRICT VALIDATION: Cannot proceed without follow & share
       if (!checkVal) {
         box.classList.add('border-red-400', 'bg-red-50/40', 'animate-pulse');
         showToast('Syarat Mutlak: Anda belum mencentang konfirmasi telah follow & share!', 'warning');
@@ -1584,12 +1892,10 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       appState.currentUser = nameVal;
       appState.isFollowedAndShared = true;
 
-      // Update Nav Badge
       document.getElementById('navUserName').textContent = nameVal;
       document.getElementById('navUserBadge').classList.remove('hidden');
       document.getElementById('navUserBadge').classList.add('flex');
 
-      // Send telemetry to Google Apps Script (asynchronous)
       sendDataToGAS({
         type: 'login_event',
         name: nameVal,
@@ -1615,16 +1921,14 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
     }
 
     async function sendDataToGAS(payload) {
-      if (!GOOGLE_SHEETS_GAS_URL) {
-        return;
-      }
+      if (!GOOGLE_SHEETS_GAS_URL) return;
 
       try {
         await fetch(GOOGLE_SHEETS_GAS_URL, {
           method: 'POST',
           mode: 'no-cors',
           headers: {
-            'Content-Type': 'application/json'
+            'Content-Type': 'text/plain;charset=utf-8'
           },
           body: JSON.stringify(payload)
         });
@@ -1637,12 +1941,10 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       if (!inputPhone) return '';
       let cleaned = inputPhone.replace(/\D/g, '');
 
-      // If user typed with country code already (e.g. 62812...)
       if (cleaned.startsWith(countryCode)) {
         return cleaned;
       }
 
-      // If starts with 0 (e.g. 0812...), trim leading zero
       if (cleaned.startsWith('0')) {
         cleaned = cleaned.substring(1);
       }
@@ -1655,7 +1957,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       const rawPhone = document.getElementById('phoneNumber').value.trim();
       const message = document.getElementById('customMessage').value;
 
-      // Handle clear button visibility
       const clearBtn = document.getElementById('clearPhoneBtn');
       if (rawPhone.length > 0) clearBtn.classList.remove('hidden');
       else clearBtn.classList.add('hidden');
@@ -1666,7 +1967,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       appState.currentLink.sanitizedPhone = sanitized;
       appState.currentLink.message = message;
 
-      // Build target URL
       if (sanitized) {
         const encText = encodeURIComponent(message);
         appState.currentLink.url = encText 
@@ -1679,17 +1979,14 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
           : `https://wa.me/`;
       }
 
-      // Character counter
       document.getElementById('charCounter').textContent = `${message.length} karakter`;
 
-      // Live header & bubble
       const headerEl = document.getElementById('previewTargetHeader');
       headerEl.textContent = sanitized ? `+${sanitized}` : 'Nomor Bisnis';
 
       const bubbleEl = document.getElementById('previewMessageBubble');
       bubbleEl.innerHTML = formatMarkdownPreview(message);
 
-      // Device time
       const now = new Date();
       const h = String(now.getHours()).padStart(2, '0');
       const m = String(now.getMinutes()).padStart(2, '0');
@@ -1703,7 +2000,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
         .replace(/</g, '&lt;')
         .replace(/>/g, '&gt;');
 
-      // WhatsApp format replacements
       clean = clean.replace(/\*(.*?)\*/g, '<strong class="font-bold">$1</strong>');
       clean = clean.replace(/_(.*?)_/g, '<em class="italic">$1</em>');
       clean = clean.replace(/~(.*?)~/g, '<span class="line-through">$1</span>');
@@ -1759,10 +2055,8 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
         return;
       }
 
-      // Save record to local user database
       saveLinkToUserDatabase();
 
-      // Send log to GAS
       sendDataToGAS({
         type: 'generate_link',
         name: appState.currentUser,
@@ -1772,7 +2066,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
         timestamp: new Date().toISOString()
       });
 
-      // Switch to Page 3
       switchPage(3);
     }
 
@@ -1784,27 +2077,55 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       document.getElementById('ctaSummaryMessage').textContent = appState.currentLink.message || '(Tanpa pesan pembuka)';
       document.getElementById('ctaOpenWaBtn').href = appState.currentLink.url;
 
-      // Render QR Code in CTA Box
       const qrContainer = document.getElementById('ctaQrcodeCanvas');
       qrContainer.innerHTML = '';
-      ctaQrInstance = new QRCode(qrContainer, {
-        text: appState.currentLink.url,
-        width: 170,
-        height: 170,
-        colorDark : "#0f172a",
-        colorLight : "#ffffff",
-        correctLevel : QRCode.CorrectLevel.H
-      });
+
+      if (typeof QRCode !== 'undefined') {
+        try {
+          ctaQrInstance = new QRCode(qrContainer, {
+            text: appState.currentLink.url,
+            width: 170,
+            height: 170,
+            colorDark : "#0f172a",
+            colorLight : "#ffffff",
+            correctLevel : QRCode.CorrectLevel.H
+          });
+        } catch(qrErr) {
+          renderFallbackQrImage(qrContainer, appState.currentLink.url);
+        }
+      } else {
+        renderFallbackQrImage(qrContainer, appState.currentLink.url);
+      }
 
       renderUserHistoryCards();
+    }
+
+    function renderFallbackQrImage(container, text) {
+      const img = document.createElement('img');
+      img.src = `https://api.qrserver.com/v1/create-qr-code/?size=170x170&data=${encodeURIComponent(text)}`;
+      img.alt = "QR Code";
+      img.className = "w-[170px] h-[170px] rounded-lg";
+      container.appendChild(img);
     }
 
     function copyCtaLink() {
       const link = document.getElementById('ctaResultLinkInput').value;
       if (!link) return;
 
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(link).then(() => {
+          showCopiedLabel();
+        }).catch(() => {
+          fallbackCopyText(link);
+        });
+      } else {
+        fallbackCopyText(link);
+      }
+    }
+
+    function fallbackCopyText(text) {
       const temp = document.createElement('textarea');
-      temp.value = link;
+      temp.value = text;
       temp.style.position = 'fixed';
       temp.style.left = '-9999px';
       document.body.appendChild(temp);
@@ -1812,16 +2133,20 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       try {
         document.execCommand('copy');
         document.body.removeChild(temp);
-        
-        const label = document.getElementById('copyBtnLabel');
-        label.textContent = 'Tersalin!';
-        setTimeout(() => { label.textContent = 'Salin'; }, 2000);
-
-        showToast('Link WhatsApp berhasil disalin ke papan klip!');
+        showCopiedLabel();
       } catch(e) {
         document.body.removeChild(temp);
         showToast('Gagal menyalin link.');
       }
+    }
+
+    function showCopiedLabel() {
+      const label = document.getElementById('copyBtnLabel');
+      if (label) {
+        label.textContent = 'Tersalin!';
+        setTimeout(() => { label.textContent = 'Salin'; }, 2000);
+      }
+      showToast('Link WhatsApp berhasil disalin ke papan klip!');
     }
 
     function downloadGeneratedQr() {
@@ -1854,11 +2179,9 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
         date: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'short', hour: '2-digit', minute: '2-digit' })
       };
 
-      // Filter duplicates of same URL for this user
       appState.history = appState.history.filter(item => !(item.user === appState.currentUser && item.url === entry.url));
       appState.history.unshift(entry);
 
-      // Keep latest 9 items per user
       if (appState.history.length > 25) {
         appState.history = appState.history.slice(0, 25);
       }
@@ -1872,7 +2195,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       const listEl = document.getElementById('userHistoryList');
       const emptyEl = document.getElementById('emptyHistoryBox');
 
-      // Filter history for current user only
       const userItems = appState.history.filter(item => item.user === appState.currentUser);
 
       if (userItems.length === 0) {
@@ -1897,17 +2219,17 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
               <span class="text-[10px] text-slate-400">${item.date}</span>
             </div>
             <p class="text-[11px] text-slate-600 line-clamp-2 bg-white p-2.5 rounded-xl border border-slate-200/60 mb-3 italic">
-              "${item.message}"
+              "${escapeHtml(item.message)}"
             </p>
           </div>
           <div class="flex items-center gap-2 pt-2 border-t border-slate-200/60">
-            <button type="button" onclick="copyCustomText('${item.url}')" class="flex-1 py-1.5 px-2 bg-white hover:bg-brand-50 hover:text-brand-700 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold flex items-center justify-center gap-1 transition">
+            <button type="button" onclick="copyCustomText('${item.url}')" class="flex-1 py-1.5 px-2 bg-white hover:bg-brand-50 hover:text-brand-700 text-slate-700 border border-slate-200 rounded-xl text-xs font-semibold flex items-center justify-center gap-1 transition cursor-pointer">
               <i class="fa-regular fa-copy text-[11px]"></i> Salin
             </button>
-            <a href="${item.url}" target="_blank" class="py-1.5 px-3 bg-brand-wa hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold flex items-center justify-center transition" title="Buka">
+            <a href="${item.url}" target="_blank" class="py-1.5 px-3 bg-brand-wa hover:bg-emerald-600 text-white rounded-xl text-xs font-semibold flex items-center justify-center transition cursor-pointer" title="Buka">
               <i class="fa-solid fa-arrow-up-right-from-square text-[10px]"></i>
             </a>
-            <button type="button" onclick="deleteHistoryItem(${item.id})" class="py-1.5 px-2 text-slate-400 hover:text-red-500 rounded-xl transition" title="Hapus">
+            <button type="button" onclick="deleteHistoryItem(${item.id})" class="py-1.5 px-2 text-slate-400 hover:text-red-500 rounded-xl transition cursor-pointer" title="Hapus">
               <i class="fa-regular fa-trash-can text-xs"></i>
             </button>
           </div>
@@ -1917,15 +2239,15 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
     }
 
     function copyCustomText(text) {
-      const temp = document.createElement('textarea');
-      temp.value = text;
-      temp.style.position = 'fixed';
-      temp.style.left = '-9999px';
-      document.body.appendChild(temp);
-      temp.select();
-      document.execCommand('copy');
-      document.body.removeChild(temp);
-      showToast('Tautan dari riwayat berhasil disalin!');
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(() => {
+          showToast('Tautan dari riwayat berhasil disalin!');
+        }).catch(() => {
+          fallbackCopyText(text);
+        });
+      } else {
+        fallbackCopyText(text);
+      }
     }
 
     function deleteHistoryItem(id) {
@@ -1944,40 +2266,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
       } catch(e) {}
       renderUserHistoryCards();
       showToast(`Semua riwayat untuk ${appState.currentUser} telah dibersihkan.`);
-    }
-
-    function triggerDonationCelebration(tierName) {
-      // Trigger canvas confetti celebration
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 80,
-          spread: 70,
-          origin: { y: 0.6 }
-        });
-      }
-
-      openPaymentModal(tierName);
-    }
-
-    function openPaymentModal(title) {
-      document.getElementById('paymentModalTitle').textContent = `Dukungan: ${title}`;
-      document.getElementById('paymentModal').classList.remove('hidden');
-    }
-
-    function closePaymentModal() {
-      document.getElementById('paymentModal').classList.add('hidden');
-    }
-
-    function confirmPaymentSuccess() {
-      closePaymentModal();
-      if (typeof confetti === 'function') {
-        confetti({
-          particleCount: 120,
-          spread: 100,
-          origin: { y: 0.5 }
-        });
-      }
-      showToast('Terima kasih banyak atas traktiran dan dukungan Anda! ✨');
     }
 
     function showToast(msg, type = 'success') {
@@ -2006,7 +2294,6 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
     }
 
     window.addEventListener('DOMContentLoaded', () => {
-      // Load saved database history
       try {
         const storedHist = localStorage.getItem('WALIG_db_history');
         if (storedHist) appState.history = JSON.parse(storedHist);
@@ -2014,26 +2301,24 @@ Gaya / Nada bicara yang diinginkan: "${tone}".`;
         appState.history = [];
       }
 
-      // Studio inputs listeners
       document.getElementById('countryCode').addEventListener('change', updateStudioPreview);
       document.getElementById('phoneNumber').addEventListener('input', updateStudioPreview);
       document.getElementById('customMessage').addEventListener('input', updateStudioPreview);
 
-      // Clear phone button
       document.getElementById('clearPhoneBtn').addEventListener('click', () => {
         document.getElementById('phoneNumber').value = '';
         updateStudioPreview();
       });
 
-      // Modal outside click listener
       document.getElementById('paymentModal').addEventListener('click', (e) => {
         if (e.target.id === 'paymentModal') closePaymentModal();
       });
 
-      // Initialize theme system
-      initTheme();
+      document.getElementById('feedbackModal').addEventListener('click', (e) => {
+        if (e.target.id === 'feedbackModal') closeFeedbackModal();
+      });
 
-      // Start on Step 1
+      initTheme();
       switchPage(1);
     });
   </script>
